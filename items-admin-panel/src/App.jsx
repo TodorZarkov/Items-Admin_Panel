@@ -2,12 +2,13 @@ import './App.css'
 import { Aside } from './components/Aside/Aside'
 import { MainContent } from './components/Content/MainContent'
 import { ContentHeader } from './components/ContentHeader/ContentHeader'
+import { Footer } from './components/Footer/Footer'
 import { Header } from './components/Header/Header'
 
 function App() {
 
   return (
-      <div className="wrapper 
+      <div className="wrapper
                                sidebar-collapse sidebar-open"> 
 
         <Header></Header>
@@ -21,12 +22,7 @@ function App() {
 
         </main>
         
-        <footer className="main-footer">
-          <div className="pull-right hidden-xs">
-            <b>Version</b> 2.0
-          </div>
-          <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-        </footer>
+        <Footer></Footer>
       </div>
   )
 }
