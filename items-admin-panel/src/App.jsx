@@ -8,12 +8,12 @@ import { Header } from './components/Header/Header'
 function App() {
 
   return (
-      <div className="wrapper
-                               sidebar-collapse sidebar-open"> 
+      // <div className="wrapper sidebar-collapse sidebar-open">
+      <div className="wrapper ">                         
 
         <Header></Header>
 
-        {/* <Aside></Aside> */}
+        <Aside></Aside>
 
         <main className="content-wrapper">
 
