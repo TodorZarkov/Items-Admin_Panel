@@ -42,3 +42,9 @@ As a SUPER ADMIN
 21. Removing admin from admin role
 22. See list of all admins
 
+****
+
+- Mobile first UI approach might be good idea for basic admin work.
+
+- Simple UI but handy and fast.
+
