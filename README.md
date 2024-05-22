@@ -10,4 +10,4 @@ A mediatory issues between users are not subject at this point.
 
 
 
-A secondary and more comprehensive purpose of this project is to show the Software Development Life Cycle (SDLC) in details.
+A secondary and more comprehensive purpose of this project is to demonstrate the Software Development Life Cycle (SDLC) in details.
