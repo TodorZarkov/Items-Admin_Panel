@@ -11,7 +11,7 @@ As a REGULAR USER
 1.
 2.
 5. Report Bug (Bug Ticket Raising)
-6. Become and Admin
+6. Become an Admin(apply for admin)
 7. Logout
 10. Raise ticket for new Category
 16. Raise a ticket for new unit
@@ -25,6 +25,7 @@ As a REGULAR ADMIN
 2.
 7.
 5.
+12. 15.
 8. Change Bug Status
 9. Raise Ticket
 11. Open Ticket
@@ -32,6 +33,8 @@ As a REGULAR ADMIN
 18. Can't change ticket already opened 
 
 As a SUPER ADMIN
+
+12.15.8.9.13.11.
 
 14. Adding User to Admin role
 19. Inviting user to admin role
