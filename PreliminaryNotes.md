@@ -54,3 +54,17 @@ As a SUPER ADMIN
 - Clasifications by importance?
 
 - Time tracking between raising, opening and solving
+
+****
+SIMPLE USER STORIES TO HELP WITH THE DIFFERENT VIEW POINTS
+
+As a guest 
+
+As a regular user
+- When I spot a bug or suggest an idea, I want all the state and view from where I started the ticket to be at my disposal at the moment
+  of the ticket creation, so I can pick watever I need to create the ticket.
+- When I create a ticket it is good to have some colored pen and arrow tools to draw over the state(the state picture) and some formatting tools, so I can describe the ticket in fast and disambiguous way.
+
+As a regular admin
+
+As a super admin
