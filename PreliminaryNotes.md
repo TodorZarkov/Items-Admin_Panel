@@ -48,3 +48,9 @@ As a SUPER ADMIN
 
 - Simple UI but handy and fast.
 
+- Search, category, pagination? A kind of filtering.
+- Order by time traking.
+
+- Clasifications by importance?
+
+- Time tracking between raising, opening and solving
