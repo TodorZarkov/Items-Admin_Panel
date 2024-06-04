@@ -55,6 +55,8 @@ As a SUPER ADMIN
 
 - Time tracking between raising, opening and solving
 
+- scope - is the admin just an admin or a tech guy use the portal to get user feedback and fix bugs?
+
 ****
 SIMPLE USER STORIES TO HELP WITH THE DIFFERENT VIEW POINTS
 
@@ -67,5 +69,8 @@ As a regular user
 - When the ticket is created, I want to track if it is viewd, opened, solved or if there's some feedback from the person assigned to my ticket.
 
 As a regular admin
+
+- I expect good mobile version, as the job is usually part time and done on the fly
+- 
 
 As a super admin
