@@ -96,4 +96,6 @@ combining "number of users with the same problem" and the admin estimation of th
 
 ### As a regular admin
 
+- I expect good mobile version, as the job is usually part time and done on the fly
+
 ### As a super admin
