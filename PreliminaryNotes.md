@@ -44,6 +44,8 @@ the required (if possible), or described as not solvable. The first one must be 
 
 As a SUPER ADMIN
 
+1. 
+2. 
 5. 
 8. 
 9. See list of all admins
