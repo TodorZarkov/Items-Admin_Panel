@@ -59,6 +59,7 @@ As a SUPER ADMIN
 19. Inviting user to admin role
 20. Rejecting user applications for admin role 
 21. Removing admin from admin role
+24. Adding / Removing Ticket Type
 
 ****
 ### Little non functional requirements
