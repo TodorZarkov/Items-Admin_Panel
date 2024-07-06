@@ -23,6 +23,7 @@ As a REGULAR USER
 17. Raise a ticket for new *Currency*  ( a/. )
 12. View my bugs
 15. Manage my profile - picture, email, username, 
+25. Add to his/her own *Watched* collection.
 
 As a REGULAR ADMIN
 
