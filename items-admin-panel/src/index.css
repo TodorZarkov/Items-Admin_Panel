@@ -1,4 +1,7 @@
+@import './static-css/reset.css';
+@import './static-css/typography.css';
+
 :root {
   
-  background-color: #242424;
+  background-color: #FAFAFA;
 }
