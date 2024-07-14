@@ -34,7 +34,7 @@
 }
 
 
-nav.nav > ul:nth-child(1) > li:nth-child(1) {
+nav.nav > ul:nth-child(1) > p {
   margin-left: 0px;
   margin-right: auto;
 }

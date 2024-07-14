@@ -7,11 +7,11 @@ function App() {
       <header>
         <nav className="nav" >
           <ul role="list">
-            <li><p>
+            <p>
               <a className="avatar" href="/">
                 <img src="/admin-logo.jpg" />
               </a>
-            </p></li>
+            </p>
             <li><a className="btn highlighted" href="/">Assigned</a></li>
             <li><a className="btn important " href="/">Watched</a></li>
             <li><a className="btn important " href="/">My Tickets</a></li>
