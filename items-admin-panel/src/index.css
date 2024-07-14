@@ -2,7 +2,9 @@
 @import './static-css/typography.css';
 
 :root {
-  
+  margin:auto;
+  min-width: 320px;
+  max-width: 375px;
   background-color: #37334D;
 }
 
@@ -20,7 +22,23 @@
 
 .nav {
   text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
 }
+
+.nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+
+nav.nav > ul:nth-child(1) > li:nth-child(1) {
+  margin-left: 0px;
+  margin-right: auto;
+}
+
 
 .important {
   color: #ed6930;
@@ -54,29 +72,5 @@
   overflow: hidden;
   border-radius: 51%;
 }
-nav>p>a>img {
-  padding: 0px;
-  margin: 0px;
-  height: 100%;
-}
 
-nav>p>a{
-  height: 100%;
-}
-
-nav>p {
-  display: inline-block;
-}
-
-nav {
-  display: block;
-}
-
-nav>ul {
-  display: inline-block;
-}
-
-nav>ul>li {
-  display: inline-block;
-}
 

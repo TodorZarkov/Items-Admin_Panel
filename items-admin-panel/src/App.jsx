@@ -6,20 +6,17 @@ function App() {
     <>
       <header>
         <nav className="nav" >
-          <p >
-            <a className="avatar" href="/">
-              <img src="/example-images/threading-bug.png" />
-            </a>
-          </p>
           <ul role="list">
-
+            <li><p>
+              <a className="avatar" href="/">
+                <img src="/admin-logo.jpg" />
+              </a>
+            </p></li>
             <li><a className="btn highlighted" href="/">Assigned</a></li>
             <li><a className="btn important " href="/">Watched</a></li>
             <li><a className="btn important " href="/">My Tickets</a></li>
             <li><a className="btn important " href="/">Create</a></li>
           </ul>
-        </nav>
-        <nav className="nav" >
           <ul role="list">
             <li><a className="btn secondary" href="/">Units</a></li>
             <li><a className="btn secondary" href="/">Categories</a></li>
@@ -27,7 +24,7 @@ function App() {
             <li><a className="btn secondary" href="/">Admins</a></li>
           </ul>
         </nav>
-        <section>
+        <section className="nav">
           <ul role="list">
             <li><a className="btn dash" href="/">
               <p>Reported</p>
