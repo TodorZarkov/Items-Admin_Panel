@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <header>
+      <header className="nav">
         <nav className="nav" >
           <ul role="list">
             <p>

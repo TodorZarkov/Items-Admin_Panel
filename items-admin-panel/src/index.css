@@ -8,6 +8,10 @@
   background-color: #37334D;
 }
 
+header {
+  padding: 2px;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -24,6 +28,7 @@
   text-transform: uppercase;
   display: flex;
   flex-direction: column;
+  gap: 3px;
 }
 
 .nav ul {
