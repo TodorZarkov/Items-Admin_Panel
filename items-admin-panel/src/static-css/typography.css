@@ -1,4 +1,11 @@
+@font-face {
+    font-family: squada-one-regular;
+    src: url(../assets/fonts/SquadaOne-Regular.ttf);
+}
+
+
 body {
-    font-family:  squada-one, Arial, Helvetica, sans-serif;
+    font-family: squada-one-regular, Helvetica, sans-serif;
     font-size: 16px;
 }
+

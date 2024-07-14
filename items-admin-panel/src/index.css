@@ -3,5 +3,80 @@
 
 :root {
   
-  background-color: #FAFAFA;
+  background-color: #37334D;
 }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border: 1px solid #ffd600;
+  border-radius: 18px;
+  height: 43px;
+  min-width: 70px;
+  color: #ffd600;
+}
+
+.nav {
+  text-transform: uppercase;
+}
+
+.important {
+  color: #ed6930;
+}
+
+.highlighted {
+  color: #30ed38;
+}
+
+.secondary {
+  color: #00B2FF;
+  display: inline;
+  padding: 0px 5px;
+}
+
+.dash {
+  height: 55px;
+  min-width: 92px;
+  flex-direction: column;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #ffd600;
+  height: 43px;
+  width: 43px;
+  color: #ffd600;
+  overflow: hidden;
+  border-radius: 51%;
+}
+nav>p>a>img {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+}
+
+nav>p>a{
+  height: 100%;
+}
+
+nav>p {
+  display: inline-block;
+}
+
+nav {
+  display: block;
+}
+
+nav>ul {
+  display: inline-block;
+}
+
+nav>ul>li {
+  display: inline-block;
+}
+
