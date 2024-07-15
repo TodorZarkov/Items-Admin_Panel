@@ -3,7 +3,12 @@
 function App() {
 
   return (
+    
     <>
+    {/* DETAILS */}
+    {/* CREATE */}
+    {/* DROPDOWN FOR MY TICKET TYPES */}
+    {/* DROPDOWN FOR THE AVATAR */}
       <header className="nav">
         <nav className="nav" >
           <ul role="list">
@@ -102,6 +107,8 @@ function App() {
             </li>
           </ul>
         </section>
+        {/* LOGIN */}
+        {/* REGISTER */}
       </main>
       <footer></footer>
     </>
