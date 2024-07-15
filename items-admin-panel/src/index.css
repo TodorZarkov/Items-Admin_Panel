@@ -2,15 +2,18 @@
 @import './static-css/typography.css';
 
 :root {
-  margin:auto;
+  margin: auto;
   min-width: 320px;
   max-width: 414px;
-  background-color: #37334D;
+  background-color: rgb(90, 87, 82);
 }
 
-header {
-  padding: 2px;
+body {
+  background-color: #37334D;
+  padding: 1px;
 }
+
+
 
 .btn {
   display: inline-flex;
@@ -24,26 +27,18 @@ header {
   color: #ffd600;
 }
 
-.nav {
-  text-transform: uppercase;
+.avatar {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #ffd600;
+  height: 43px;
+  width: 43px;
+  color: #ffd600;
+  overflow: hidden;
+  border-radius: 51%;
 }
-
-.nav ul {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  gap: 10px;
-}
-
-
-nav.nav > ul:nth-child(1) > p {
-  margin-left: 0px;
-  margin-right: auto;
-}
-
 
 .important {
   color: #ed6930;
@@ -65,17 +60,99 @@ nav.nav > ul:nth-child(1) > p {
   flex-direction: column;
 }
 
-.avatar {
+
+.nav {
+  text-transform: uppercase;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border: 1px solid #ffd600;
-  height: 43px;
-  width: 43px;
-  color: #ffd600;
-  overflow: hidden;
-  border-radius: 51%;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+nav.nav>ul:nth-child(1)>p {
+  margin-left: 0px;
+  margin-right: auto;
 }
 
 
+/* start filter bar */
+.filter {
+  margin-top: 5px;
+  border: 1px solid #00B2FF;
+  border-radius: 9px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: stretch;
+}
+
+.search {
+  flex-grow: 1;
+  min-width: 124px;
+}
+
+.search:focus{
+  border: 1px solid red;
+  outline: 0;
+}
+
+.small {
+  cursor: pointer;
+  min-width: 36px;
+  height: 26px;
+  border-radius: 9px;
+  padding: 0;
+}
+
+.invisible {
+  border: transparent;
+  background-color: transparent;
+}
+
+/* end filter bar */
+
+/* rows whit all data */
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.row li {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  background-color: transparent;
+  border: 1px solid #00B2FF;
+  border-radius: 9px;
+  height: 90px;
+  width: 36px;
+  color: whitesmoke;
+}
+
+
+li.prev-img {
+  width: 48px;
+  border-color: #ffd600;
+}
+
+li.prev-content {
+  flex-grow: 1;
+  min-width: 124px;
+  overflow: scroll;
+  line-height: 15px;
+  border-color: #ffd600;
+}
+
+.vertical-txt {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  overflow: scroll;
+}
+
+/* end rows whit all data */

@@ -35,62 +35,68 @@ function App() {
         </section>
       </header>
       <main>
-        <section>
-          <form action="">
-            <button>T</button>
-            <button>S</button>
-            <button>U</button>
-            <button>T</button>
-            <input type="search" placeholder="SEARCH" />
+        <section className="all-container">
+          <form className="filter" action="">
+            <button className="btn small invisible" type="button">T</button>
+            <button className="btn small invisible" type="button">S</button>
+            <button className="btn small invisible" type="button">U</button>
+            <button className="btn small invisible" type="button">T</button>
+            <input className="btn small invisible search" type="search" placeholder="SEARCH" />
           </form>
           <ul role="list">
             <li>
-              <ul role="list">
+              <ul className="row" role="list">
                 <li>
                   <p>14:35</p>
                   <p>18</p>
                   <p>Jan</p>
                   <p>`24</p>
                 </li>
-                <li>
+                <li className="vertical-txt">
                   <p>3</p>
                 </li>
-                <li>
-                  <p>358720</p>
+                <li className="vertical-txt">
+                  <p>35872</p>
                 </li>
-                <li>bug</li>
-                <li>
+                <li className="vertical-txt">bug</li>
+                <li className="prev-img">
                   <a href="/">
                     <img src="/example-images/threading-bug.png" alt="" />
                   </a>
                 </li>
-                <li>
-                  <p>Doesn’t redirect after login. Goes to the main page every time. Doesn’t autofill properly the lo...</p>
+                <li className="prev-content">
+                  <a href="/">
+                    <p>Doesn’t redirect after login. Goes to the main page every time. Doesn’t autofill properly the lo...</p>
+                  </a>
                 </li>
               </ul>
             </li>
-            <li>
-              <ul role="list">
+
+            <li >
+              <ul className="row" role="list">
                 <li>
                   <p>14:35</p>
                   <p>18</p>
                   <p>Jan</p>
                   <p>`24</p>
                 </li>
-                <li>
+                <li className="vertical-txt">
                   <p>3</p>
                 </li>
-                <li>
-                  <p>358720</p>
+                <li className="vertical-txt">
+                  <p>4558720</p>
                 </li>
-                <li>bug</li>
-                <li>
+                <li className="vertical-txt">bug</li>
+                <li className="prev-img">
                   <a href="/">
                     <img src="/example-images/threading-bug.png" alt="" />
                   </a>
                 </li>
-                <li>
-                  <p>Doesn’t redirect after login. Goes to the main page every time. Doesn’t autofill properly the lo...</p>
+                <li className="prev-content">
+                  <a href="/">
+                    <p>Doesn’t redirect after login. Goes to the main page every time. Doesn’t autofill properly the lo...</p>
+                  </a>
+
                 </li>
               </ul>
             </li>

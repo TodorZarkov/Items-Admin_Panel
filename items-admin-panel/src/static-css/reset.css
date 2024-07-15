@@ -45,9 +45,9 @@ body {
   text-decoration-skip-ink: auto;
 } */
 
-a:is([class]) {
+a {
   text-decoration: none;
-  /* color:#ffd600; */
+  color: whitesmoke;
 }
 
 /* Make images easier to work with */
