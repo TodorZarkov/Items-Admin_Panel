@@ -25,6 +25,7 @@ body {
   height: 43px;
   min-width: 70px;
   color: #ffd600;
+  text-transform: uppercase;
 }
 
 .avatar {
@@ -36,7 +37,10 @@ body {
   height: 43px;
   width: 43px;
   color: #ffd600;
-  overflow: hidden;
+  border-radius: 51%;
+}
+
+.avatar img {
   border-radius: 51%;
 }
 
@@ -58,11 +62,11 @@ body {
   height: 55px;
   min-width: 92px;
   flex-direction: column;
+  text-transform:none;
 }
 
 
 .nav {
-  text-transform: uppercase;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -116,7 +120,7 @@ nav.nav>ul:nth-child(1)>p {
 
 /* end filter bar */
 
-/* rows whit all data */
+/* rows with all data */
 .row {
   display: flex;
   flex-wrap: nowrap;
@@ -155,4 +159,42 @@ li.prev-content {
   overflow: scroll;
 }
 
-/* end rows whit all data */
+/* end rows with all data */
+
+/* start dropdown */
+.btn.dropbtn {
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 70px;
+  z-index: 1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  background-color: black;
+  border: 1px solid #ffd600;
+  border-radius: 9px;
+}
+
+.dropdown-content a {
+  display: block;
+  color: #ED6930;
+  border-radius: 9px;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+/* end dropdown */
