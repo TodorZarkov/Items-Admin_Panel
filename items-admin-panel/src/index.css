@@ -143,6 +143,11 @@ nav.nav>ul:nth-child(1)>p {
 li.prev-img {
   width: 48px;
   border-color: #ffd600;
+  overflow: hidden;
+}
+
+.prev-img img {
+  max-height: 90px;
 }
 
 li.prev-content {

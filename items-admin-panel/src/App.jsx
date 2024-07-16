@@ -95,7 +95,7 @@ function App() {
                 <li className="vertical-txt">bug</li>
                 <li className="prev-img">
                   <a href="/">
-                    <img src="/example-images/threading-bug.png" alt="" />
+                    <img src="/example-images/tall_image.png" alt="" />
                   </a>
                 </li>
                 <li className="prev-content">
