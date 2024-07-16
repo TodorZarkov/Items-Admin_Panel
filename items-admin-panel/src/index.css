@@ -1,6 +1,12 @@
 @import './static-css/reset.css';
 @import './static-css/typography.css';
 
+/* service elements */
+.not-render {
+  display: none !important;
+}
+/* end service elements */
+
 :root {
   margin: auto;
   min-width: 320px;
@@ -46,6 +52,26 @@ body {
 
 .important {
   color: #ed6930;
+}
+
+.register {
+  margin:  10px 0 10px 10px;
+  cursor: pointer;
+  width: 68px;
+  height: 30px;
+  border-radius: 18px;
+  padding: 0;
+  color: red;
+}
+
+.login {
+  margin: 10px 10px 10px 0;
+  cursor: pointer;
+  width: 68px;
+  height: 30px;
+  border-radius: 18px;
+  padding: 0;
+  color: #ED6930;
 }
 
 .highlighted {

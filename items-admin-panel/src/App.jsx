@@ -7,20 +7,20 @@ function App() {
     <>
       {/* DETAILS */}
       {/* CREATE */}
-      {/* DROPDOWN FOR MY TICKET TYPES */}
-      {/* DROPDOWN FOR THE AVATAR */}
       <header className="nav">
         <nav className="nav" >
           <ul role="list">
-            <p className="avatar dropdown">
+            <p className="avatar dropdown not-render">
               <img className="dropbtn" src="/admin-logo.jpg" />
               <div className="dropdown-content">
                 <a href="/">Menage Profile</a>
                 <a href="/">Change Picture</a>
               </div>
             </p>
-            <li><a className="btn highlighted" href="/">Assigned</a></li>
-            <li className="dropdown">
+            <li className="not-render">
+              <a className="btn highlighted" href="/">Assigned</a>
+            </li>
+            <li className="dropdown not-render">
               <button className="btn important dropbtn" type="button">Watched</button>
               <div className="dropdown-content">
                 <a href="/">Bugs</a>
@@ -30,7 +30,7 @@ function App() {
                 <a href="/">All</a>
               </div>
             </li>
-            <li className="dropdown">
+            <li className="dropdown not-render">
               <button className="btn important dropbtn" type="button">My Tickets</button>
               <div className="dropdown-content">
                 <a href="/">Bugs</a>
@@ -40,7 +40,7 @@ function App() {
                 <a href="/">All</a>
               </div>
             </li>
-            <li className="dropdown">
+            <li className="dropdown not-render">
               <button className="btn important dropbtn" type="button">Create</button>
               <div className="dropdown-content">
                 <a href="/">Bug</a>
@@ -50,8 +50,14 @@ function App() {
                 <a href="/">Any</a>
               </div>
             </li>
+            <li  >
+              <a className="btn register" href="/">Register</a>
+            </li>
+            <li  >
+              <a className="btn login" href="/">Login</a>
+            </li>
           </ul>
-          <ul role="list">
+          <ul className="not-render" role="list">
             <li><a className="btn secondary" href="/">Units</a></li>
             <li><a className="btn secondary" href="/">Categories</a></li>
             <li><a className="btn secondary" href="/">Currencies</a></li>
@@ -69,7 +75,7 @@ function App() {
         </section>
       </header>
       <main>
-        <section className="all-container">
+        <section className="not-render all-container">
           <form className="filter" action="">
             <button className="btn small invisible" type="button">T</button>
             <button className="btn small invisible" type="button">S</button>
