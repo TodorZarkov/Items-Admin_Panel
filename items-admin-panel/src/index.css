@@ -146,17 +146,23 @@ li.prev-img {
 }
 
 li.prev-content {
+  justify-content: start;
   flex-grow: 1;
   min-width: 124px;
-  overflow: scroll;
   line-height: 15px;
   border-color: #ffd600;
+  overflow: hidden;
+}
+
+.prev-content p {
+  padding: 2px;
+  text-indent: 5%;
 }
 
 .vertical-txt {
   writing-mode: vertical-rl;
   text-orientation: upright;
-  overflow: scroll;
+  overflow: auto;
 }
 
 /* end rows with all data */
@@ -186,6 +192,8 @@ li.prev-content {
   display: block;
   color: #ED6930;
   border-radius: 9px;
+  padding: 1px;
+  white-space: nowrap;
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}

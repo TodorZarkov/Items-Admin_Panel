@@ -15,8 +15,8 @@ function App() {
             <p className="avatar dropdown">
               <img className="dropbtn" src="/admin-logo.jpg" />
               <div className="dropdown-content">
-                <a href="/">MenageProfile</a>
-                <a href="/">ChangePicture</a>
+                <a href="/">Menage Profile</a>
+                <a href="/">Change Picture</a>
               </div>
             </p>
             <li><a className="btn highlighted" href="/">Assigned</a></li>
@@ -100,7 +100,7 @@ function App() {
                 </li>
                 <li className="prev-content">
                   <a href="/">
-                    <p>Doesn’t redirect after login. Goes to the main page every time. Doesn’t autofill properly the lo...</p>
+                    <p>Doesn’t redirect after login. Goes to the main page every time. Doesn’t autofill properly the lo... Doesn’t redirect after login. Goes to the main page every time. Doesn’t autofill properly the lo...Doesn’t redirect after login. Goes to the main page every time. Doesn’t autofill properly the lo...</p>
                   </a>
                 </li>
               </ul>
