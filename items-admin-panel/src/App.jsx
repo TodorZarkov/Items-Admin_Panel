@@ -148,6 +148,11 @@ function App() {
           <input type="password" name="repassword" placeholder="CONFIRM PASSWORD"/>
           <button className="btn register danger" type="submit">Register</button>
         </form>
+        <form className="register-form not-render">
+          <input type="email" name="email" placeholder="EMAIL"/>
+          <input type="password" name="password" placeholder="PASSWORD"/>
+          <button className="btn login" type="submit">Login</button>
+        </form>
         {/* LOGIN */}
         {/* REGISTER */}
       </main>

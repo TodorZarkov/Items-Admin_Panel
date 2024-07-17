@@ -271,6 +271,7 @@ li.prev-content {
 
 .register-form button {
   align-self: flex-end;
+  margin-right: 0;
 }
 
 .register-form button:focus {
