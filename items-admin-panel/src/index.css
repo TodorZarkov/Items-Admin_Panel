@@ -237,3 +237,32 @@ li.prev-content {
   background-color: #3e8e41;
 }
 /* end dropdown */
+
+/* start register form */
+.register-form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 264px;
+}
+
+.register-form input {
+  width: 264px;
+  height: 24px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 10px;
+  color: white;
+  border: 1px solid white;
+
+}
+
+.register-form button {
+  align-self:flex-end;
+}
+/* end register form */
