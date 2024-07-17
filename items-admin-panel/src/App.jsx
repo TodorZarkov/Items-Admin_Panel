@@ -7,7 +7,7 @@ function App() {
     <>
       {/* DETAILS */}
       {/* CREATE */}
-      <header className="nav">
+      <header className="nav not-render">
         <nav className="nav" >
           <ul role="list">
             <p className="avatar dropdown not-render">
@@ -74,7 +74,7 @@ function App() {
           </ul>
         </section>
       </header>
-      <main>
+      <main className="not-render">
         <section className="not-render all-container">
           <form className="filter" action="">
             <button className="btn small invisible" type="button">T</button>
@@ -143,19 +143,39 @@ function App() {
           </ul>
         </section>
         <form className="register-form">
-          <input type="email" name="email" placeholder="EMAIL"/>
-          <input type="password" name="password" placeholder="SET STRONG PASSWORD"/>
-          <input type="password" name="repassword" placeholder="CONFIRM PASSWORD"/>
+          <input type="email" name="email" placeholder="EMAIL" />
+          <input type="password" name="password" placeholder="SET STRONG PASSWORD" />
+          <input type="password" name="repassword" placeholder="CONFIRM PASSWORD" />
           <button className="btn register danger" type="submit">Register</button>
         </form>
         <form className="register-form not-render">
-          <input type="email" name="email" placeholder="EMAIL"/>
-          <input type="password" name="password" placeholder="PASSWORD"/>
+          <input type="email" name="email" placeholder="EMAIL" />
+          <input type="password" name="password" placeholder="PASSWORD" />
           <button className="btn login" type="submit">Login</button>
         </form>
         {/* LOGIN */}
         {/* REGISTER */}
       </main>
+      <form className="create-form" action="">
+        <div className="create-input-wrapper">
+          <label for="">Title:</label>
+          <input type="text" name="title" id="title" />
+        </div>
+        <div className="create-input-wrapper">
+          <label for="">Description:</label>
+          <input type="textarea" name="description" id="description" />
+        </div>
+        <div className="create-input-wrapper">
+          <label for="">Type:</label>
+          <select name="type" id="type" >
+            <option value="bug">Bug</option>
+            <option value="bug">Unit</option>
+            <option value="bug">Currency</option>
+            <option value="bug">Category</option>
+          </select>
+        </div>
+
+      </form>
       <footer></footer>
     </>
   )

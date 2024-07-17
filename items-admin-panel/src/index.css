@@ -280,3 +280,57 @@ li.prev-content {
 }
 
 /* end register form */
+
+/* create form */
+
+.create-form {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+}
+
+.create-form input, .create-form select  {
+  height: 26px;
+  background-color: transparent;
+  border-radius: 0 9px 9px 0;
+  color: white;
+  border: 1px solid white;
+  border-left: none;
+  flex-grow: 1;
+}
+
+.create-form option {
+  background-color: #37334D;
+  color: whitesmoke;
+}
+
+.create-form label {
+  height: 26px;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: transparent;
+  border-radius: 9px 0 0 9px;
+  color: rgba(255, 255, 255, 0.356);
+  border: 1px solid white;
+  border-right: none;
+}
+
+.create-form input:focus {
+  outline: none;
+  border: 1px solid #30ed38;
+}
+
+.create-input-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 264px;
+
+}
+
+
+/* end create form */
