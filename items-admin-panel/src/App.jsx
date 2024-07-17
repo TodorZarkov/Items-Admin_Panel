@@ -143,9 +143,9 @@ function App() {
           </ul>
         </section>
         <form className="register-form">
-          <input type="email" name="email" placeholder="Email"/>
-          <input type="password" name="password" placeholder="Set strong password"/>
-          <input type="password" name="repassword" placeholder="Confirm password"/>
+          <input type="email" name="email" placeholder="EMAIL"/>
+          <input type="password" name="password" placeholder="SET STRONG PASSWORD"/>
+          <input type="password" name="repassword" placeholder="CONFIRM PASSWORD"/>
           <button className="btn register danger" type="submit">Register</button>
         </form>
         {/* LOGIN */}

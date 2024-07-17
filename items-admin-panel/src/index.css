@@ -5,6 +5,7 @@
 .not-render {
   display: none !important;
 }
+
 /* end service elements */
 
 :root {
@@ -55,7 +56,7 @@ body {
 }
 
 .register {
-  margin:  10px 0 10px 10px;
+  margin: 10px 0 10px 10px;
   cursor: pointer;
   width: 68px;
   height: 30px;
@@ -88,7 +89,7 @@ body {
   height: 55px;
   min-width: 92px;
   flex-direction: column;
-  text-transform:none;
+  text-transform: none;
 }
 
 
@@ -126,7 +127,7 @@ nav.nav>ul:nth-child(1)>p {
   min-width: 124px;
 }
 
-.search:focus{
+.search:focus {
   border: 1px solid red;
   outline: 0;
 }
@@ -213,7 +214,7 @@ li.prev-content {
   position: absolute;
   min-width: 70px;
   z-index: 1;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   background-color: black;
   border: 1px solid #ffd600;
   border-radius: 9px;
@@ -227,7 +228,9 @@ li.prev-content {
   white-space: nowrap;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+  background-color: #f1f1f1
+}
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -236,6 +239,7 @@ li.prev-content {
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
 /* end dropdown */
 
 /* start register form */
@@ -253,16 +257,25 @@ li.prev-content {
 .register-form input {
   width: 264px;
   height: 24px;
-  text-transform: uppercase;
   text-align: center;
   background-color: transparent;
   border-radius: 10px;
   color: white;
   border: 1px solid white;
+}
 
+.register-form input:focus {
+  outline: none;
+  border-color:#30ed38;
 }
 
 .register-form button {
-  align-self:flex-end;
+  align-self: flex-end;
 }
+
+.register-form button:focus {
+  outline: none;
+  border-color:#30ed38;
+}
+
 /* end register form */
