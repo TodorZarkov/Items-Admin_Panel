@@ -376,6 +376,33 @@ li.prev-content {
 
 /* input file */
 
+.file-input::file-selector-button{
+  visibility: hidden;
+  color: transparent;
+}
+.file-input::-webkit-file-upload-button{
+  visibility: hidden;
+  color: transparent;
+}
+
+.create-form .file-input {
+  width: 264px;
+  height: 192px;
+  border: 1px solid white;
+  border-radius: 9px;
+  background-position: center;
+  background-image: url("/example-images/tall_image.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+
+  color: whitesmoke;
+  text-shadow: 0 0 5px black,0 0 5px black,
+                 0 0 5px black,0 0 5px black,
+                 0 0 5px black,0 0 5px black,
+                 0 0 5px black,0 0 5px black;
+  
+}
+
 
 
 /* end input file */

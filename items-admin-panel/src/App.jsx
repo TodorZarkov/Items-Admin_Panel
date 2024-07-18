@@ -180,8 +180,9 @@ function App() {
             <option value="bug">Category</option>
           </select>
         </div>
-        <div>
-          <input type="file" />
+        <div className="create-input-wrapper">
+          <input className="file-input" type="file" >
+          </input>
         </div>
       </form>
       <footer></footer>
