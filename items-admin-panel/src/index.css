@@ -333,4 +333,52 @@ li.prev-content {
 }
 
 
+
+/* Description textarea */
+
+
+.create-input-wrapper.description {
+  position: static;
+  display: block;
+}
+
+.create-input-wrapper textarea{
+  height:146px;
+  width:264px;
+  text-indent: 80px;
+  border: 1px solid white;
+  outline: none;
+  background-color: transparent;
+  border-radius: 9px;
+  color: whitesmoke;
+  padding: 2px;
+  margin: 0;
+}
+.create-form textarea:focus {
+  outline: none;
+  border: 1px solid #30ed38;
+}
+.create-input-wrapper.description label{
+  height: min-content;
+  width:min-content;
+  border: none;
+  position: absolute;
+}
+/* end Description textarea */
+
+
+.create-form-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+/* input file */
+
+
+
+/* end input file */
+
+
 /* end create form */

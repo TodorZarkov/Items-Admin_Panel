@@ -158,12 +158,18 @@ function App() {
       </main>
       <form className="create-form" action="">
         <div className="create-input-wrapper">
-          <label for="">Title:</label>
+          <label for="title">Title:</label>
           <input type="text" name="title" id="title" />
         </div>
-        <div className="create-input-wrapper">
-          <label for="">Description:</label>
-          <input type="textarea" name="description" id="description" />
+        <div className="create-input-wrapper description">
+          <label for="description">Description:</label>
+          <textarea
+          name="description" 
+          id="description"/>
+        </div>
+        <div className="create-form-buttons">
+          <button className="btn login" type="button">Back</button>
+          <button className="btn register" type="submit">Create</button>
         </div>
         <div className="create-input-wrapper">
           <label for="">Type:</label>
@@ -174,7 +180,9 @@ function App() {
             <option value="bug">Category</option>
           </select>
         </div>
-
+        <div>
+          <input type="file" />
+        </div>
       </form>
       <footer></footer>
     </>
