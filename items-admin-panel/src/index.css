@@ -1,0 +1,411 @@
+@import './static-css/reset.css';
+@import './static-css/typography.css';
+
+/* service elements */
+.not-render {
+  display: none !important;
+}
+
+/* end service elements */
+
+:root {
+  margin: auto;
+  min-width: 320px;
+  max-width: 414px;
+  background-color: rgb(90, 87, 82);
+}
+
+body {
+  background-color: #37334D;
+  padding: 1px;
+}
+
+
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border: 1px solid #ffd600;
+  border-radius: 18px;
+  height: 43px;
+  min-width: 70px;
+  color: #ffd600;
+  text-transform: uppercase;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #ffd600;
+  height: 43px;
+  width: 43px;
+  color: #ffd600;
+  border-radius: 51%;
+}
+
+.avatar img {
+  border-radius: 51%;
+}
+
+.important {
+  color: #ed6930;
+}
+
+.register {
+  margin: 10px 0 10px 10px;
+  cursor: pointer;
+  width: 68px;
+  height: 30px;
+  border-radius: 18px;
+  padding: 0;
+  color: red;
+}
+
+.login {
+  margin: 10px 10px 10px 0;
+  cursor: pointer;
+  width: 68px;
+  height: 30px;
+  border-radius: 18px;
+  padding: 0;
+  color: #ED6930;
+}
+
+.highlighted {
+  color: #30ed38;
+}
+
+.secondary {
+  color: #00B2FF;
+  display: inline;
+  padding: 0px 5px;
+}
+
+.dash {
+  height: 55px;
+  min-width: 92px;
+  flex-direction: column;
+  text-transform: none;
+}
+
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+nav.nav>ul:nth-child(1)>p {
+  margin-left: 0px;
+  margin-right: auto;
+}
+
+
+/* start filter bar */
+.filter {
+  margin-top: 5px;
+  border: 1px solid #00B2FF;
+  border-radius: 9px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: stretch;
+}
+
+.search {
+  flex-grow: 1;
+  min-width: 124px;
+}
+
+.search:focus {
+  border: 1px solid red;
+  outline: 0;
+}
+
+.small {
+  cursor: pointer;
+  min-width: 36px;
+  height: 26px;
+  border-radius: 9px;
+  padding: 0;
+}
+
+.invisible {
+  border: transparent;
+  background-color: transparent;
+}
+
+/* end filter bar */
+
+/* rows with all data */
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.row li {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  background-color: transparent;
+  border: 1px solid #00B2FF;
+  border-radius: 9px;
+  height: 90px;
+  width: 36px;
+  color: whitesmoke;
+}
+
+
+li.prev-img {
+  width: 48px;
+  border-color: #ffd600;
+  overflow: hidden;
+}
+
+.prev-img img {
+  max-height: 90px;
+}
+
+li.prev-content {
+  justify-content: start;
+  flex-grow: 1;
+  min-width: 124px;
+  line-height: 15px;
+  border-color: #ffd600;
+  overflow: hidden;
+}
+
+.prev-content p {
+  padding: 2px;
+  text-indent: 5%;
+}
+
+.vertical-txt {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  overflow: auto;
+}
+
+/* end rows with all data */
+
+/* start dropdown */
+.btn.dropbtn {
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 70px;
+  z-index: 1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background-color: black;
+  border: 1px solid #ffd600;
+  border-radius: 9px;
+}
+
+.dropdown-content a {
+  display: block;
+  color: #ED6930;
+  border-radius: 9px;
+  padding: 1px;
+  white-space: nowrap;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+/* end dropdown */
+
+/* start register form */
+.register-form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 264px;
+}
+
+.register-form input {
+  width: 264px;
+  height: 24px;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 10px;
+  color: white;
+  border: 1px solid white;
+}
+
+.register-form input:focus {
+  outline: none;
+  border-color:#30ed38;
+}
+
+.register-form button {
+  align-self: flex-end;
+  margin-right: 0;
+}
+
+.register-form button:focus {
+  outline: none;
+  border-color:#30ed38;
+}
+
+/* end register form */
+
+/* create form */
+
+.create-form {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+}
+
+.create-form input, .create-form select  {
+  height: 26px;
+  background-color: transparent;
+  border-radius: 0 9px 9px 0;
+  color: white;
+  border: 1px solid white;
+  border-left: none;
+  flex-grow: 1;
+}
+
+.create-form option {
+  background-color: #37334D;
+  color: whitesmoke;
+}
+
+.create-form label {
+  height: 26px;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: transparent;
+  border-radius: 9px 0 0 9px;
+  color: rgba(255, 255, 255, 0.356);
+  border: 1px solid white;
+  border-right: none;
+}
+
+.create-form input:focus {
+  outline: none;
+  border: 1px solid #30ed38;
+}
+
+.create-input-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 264px;
+
+}
+
+
+
+/* Description textarea */
+
+
+.create-input-wrapper.description {
+  position: static;
+  display: block;
+}
+
+.create-input-wrapper textarea{
+  height:146px;
+  width:264px;
+  text-indent: 80px;
+  border: 1px solid white;
+  outline: none;
+  background-color: transparent;
+  border-radius: 9px;
+  color: whitesmoke;
+  padding: 2px;
+  margin: 0;
+}
+.create-form textarea:focus {
+  outline: none;
+  border: 1px solid #30ed38;
+}
+.create-input-wrapper.description label{
+  height: min-content;
+  width:min-content;
+  border: none;
+  position: absolute;
+}
+/* end Description textarea */
+
+
+.create-form-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+/* input file */
+
+.file-input::file-selector-button{
+  visibility: hidden;
+  color: transparent;
+}
+.file-input::-webkit-file-upload-button{
+  visibility: hidden;
+  color: transparent;
+}
+
+.create-form .file-input {
+  width: 264px;
+  height: 192px;
+  border: 1px solid white;
+  border-radius: 9px;
+  background-position: center;
+  background-image: url("/example-images/tall_image.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+
+  color: whitesmoke;
+  text-shadow: 0 0 5px black,0 0 5px black,
+                 0 0 5px black,0 0 5px black,
+                 0 0 5px black,0 0 5px black,
+                 0 0 5px black,0 0 5px black;
+  
+}
+
+
+
+/* end input file */
+
+
+/* end create form */
