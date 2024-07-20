@@ -1,4 +1,4 @@
-export function CreateTicket() {
+export function TicketCreate() {
     return(
         <form className="create-form" action="">
         <div className="create-input-wrapper">

@@ -1,17 +1,19 @@
+import { Link } from "react-router-dom";
+
 export function GuestNav() {
     const path = location.pathname;
 
     if (path == '/login') {
         return (
             <li >
-                <a className="btn register" href="/">Register</a>
+                <Link className="btn register" to="/register">Register</Link>
             </li>
         );
 
     } else if (path == '/register') {
         return (
             <li >
-                <a className="btn login" href="/">Login</a>
+                <Link className="btn login" to="/login">Login</Link>
             </li>
         );
 
@@ -19,10 +21,10 @@ export function GuestNav() {
         return (
             <>
                 <li >
-                    <a className="btn register" href="/">Register</a>
+                    <Link className="btn register" to="/register">Register</Link>
                 </li>
                 <li >
-                    <a className="btn login" href="/">Login</a>
+                    <Link className="btn login" to="/login">Login</Link>
                 </li>
             </>
         );
