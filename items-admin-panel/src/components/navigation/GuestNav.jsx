@@ -1,12 +1,34 @@
+import { Link } from "react-router-dom";
+
 export function GuestNav() {
-    return (
-        <>
+    const path = location.pathname;
+
+    if (path == '/login') {
+        return (
             <li >
-                <a className="btn register" href="/">Register</a>
+                <Link className="btn register" to="/register">Register</Link>
             </li>
+        );
+
+    } else if (path == '/register') {
+        return (
             <li >
-                <a className="btn login" href="/">Login</a>
+                <Link className="btn login" to="/login">Login</Link>
             </li>
-        </>
-    );
+        );
+
+    } else {
+        return (
+            <>
+                <li >
+                    <Link className="btn register" to="/register">Register</Link>
+                </li>
+                <li >
+                    <Link className="btn login" to="/login">Login</Link>
+                </li>
+            </>
+        );
+
+
+    }
 }
