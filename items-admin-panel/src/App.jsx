@@ -16,9 +16,8 @@ function App() {
   const [auth, setAuth] = useState();
 
 
-  async function onLoginSubmit(e) {
-    e.preventDefault();
-    console.log(Object.fromEntries(new FormData(e.target)));
+  async function onLoginSubmit(data) {
+    console.log(data);
   }
 
   return (
@@ -39,7 +38,7 @@ function App() {
         <Route path="/login" element={
           <>
             <Header />
-            <Login onLoginSubmit={onLoginSubmit} />
+            <Login />
           </>
         } />
 

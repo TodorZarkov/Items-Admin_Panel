@@ -1,4 +1,6 @@
-const domain = "https://localhost:7229";
+import {apiHost} from '../../settings/config'
+
+const domain = apiHost;
 //depends on:
 //-user stringified  object in session storage;
 //-user.token (the Base64 JWT without the "Bearer" word)
