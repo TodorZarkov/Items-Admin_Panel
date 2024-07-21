@@ -26,7 +26,6 @@ function App() {
       const claims = jwtDecode(result.token);
       const token = result.token;
       setAuth({token, claims});
-      console.log(claims);
 
       navigate('/');
     } catch (err) {
@@ -37,7 +36,17 @@ function App() {
 
   }
 
+  async function onRegisterSubmit(data) {
+    const {rePassword, ...registerData} = data;
+    //TODO: VALIDATE PROPERLY
+    if (rePassword !== registerData.password) {
+      return;
+    }
+    console.log(registerData);
+  }
+
   const authContext = {
+    onRegisterSubmit,
     onLoginSubmit,
     ...auth
   };

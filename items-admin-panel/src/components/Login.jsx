@@ -5,13 +5,13 @@ import { useForm } from "../hooks/useForm";
 export function Login() {
   const {onLoginSubmit} = useContext(AuthContext);
 
-  const {values, onChangeHandler ,onSubmit} = useForm(
+  const {values, onChangeHandler ,onSubmitHandler} = useForm(
     { "email": '', 
       "password": ''},
     onLoginSubmit);
 
   return (
-    <form className="register-form" onSubmit={onSubmit}>
+    <form className="register-form" onSubmit={onSubmitHandler}>
       <input
         type="email"
         name="email"

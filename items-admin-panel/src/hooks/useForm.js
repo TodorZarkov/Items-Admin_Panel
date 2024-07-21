@@ -1,21 +1,21 @@
 import { useState } from "react";
 
-export function useForm(initialValues, onSubmitHandler) {
+export function useForm(initialValues, onSubmit) {
     const [values, setValues] = useState(initialValues);
 
     function onChangeHandler(e) {
         setValues(state => ({...state, [e.target.name]: e.target.value}));
     };
 
-    function onSubmit(e) {
+    function onSubmitHandler(e) {
         e.preventDefault();
 
-        onSubmitHandler(values)
+        onSubmit(values)
     }
 
     return {
         values,
         onChangeHandler,
-        onSubmit
+        onSubmitHandler
     };
 };
