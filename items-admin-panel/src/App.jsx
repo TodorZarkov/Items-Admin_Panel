@@ -9,9 +9,9 @@ import { Units } from "./components/Units"
 import { Welcome } from "./components/Welcome"
 import { useState } from "react";
 import { AuthContext } from "./contexts/AuthContext"
-import { login } from "./services/authService"
+import { login, register } from "./services/authService"
 import { useNavigate } from "react-router-dom"
-import {jwtDecode} from "jwt-decode"
+import { jwtDecode } from "jwt-decode"
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
       const result = await login(data);
       const claims = jwtDecode(result.token);
       const token = result.token;
-      setAuth({token, claims});
+      setAuth({ token, claims });
 
       navigate('/');
     } catch (err) {
@@ -37,12 +37,23 @@ function App() {
   }
 
   async function onRegisterSubmit(data) {
-    const {rePassword, ...registerData} = data;
-    //TODO: VALIDATE PROPERLY
-    if (rePassword !== registerData.password) {
-      return;
+    try {
+      const { rePassword, ...registerData } = data;
+      //TODO: VALIDATE PROPERLY
+      if (rePassword !== registerData.password) {
+        return;
+      }
+      const result = await register(registerData);
+      const token = result.token;
+      const claims = jwtDecode(token)
+      setAuth({ token, claims });
+
+      navigate('/');
+    } catch (err) {
+      //TODO: ADD ADEQUATE REGISTER FAIL ERROR PAGE
+      console.log("TODO: ADD ADEQUATE REGISTER FAIL ERROR PAGE")
+      console.log(err);
     }
-    console.log(registerData);
   }
 
   const authContext = {
@@ -52,7 +63,7 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider value={{...authContext}}>
+    <AuthContext.Provider value={{ ...authContext }}>
       <Routes>
         {/* DETAILS */}
         <Route path="/*" element={
