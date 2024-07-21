@@ -7,12 +7,22 @@ import { Tickets } from "./components/Tickets"
 import { TicketDetails } from "./components/TicketDetails"
 import { Units } from "./components/Units"
 import { Welcome } from "./components/Welcome"
+import { useState } from "react";
+import { AuthContext } from "./contexts/AuthContext"
 
 
 function App() {
 
+  const [auth, setAuth] = useState();
+
+
+  async function onLoginSubmit(e) {
+    e.preventDefault();
+    console.log(Object.fromEntries(new FormData(e.target)));
+  }
+
   return (
-    <>
+    <AuthContext.Provider value={{onLoginSubmit}}>
       <Routes>
         {/* DETAILS */}
         <Route path="/*" element={
@@ -29,7 +39,7 @@ function App() {
         <Route path="/login" element={
           <>
             <Header />
-            <Login />
+            <Login onLoginSubmit={onLoginSubmit} />
           </>
         } />
 
@@ -46,7 +56,8 @@ function App() {
       </Routes>
 
       <footer></footer>
-    </>
+
+    </AuthContext.Provider>
   );
 }
 
