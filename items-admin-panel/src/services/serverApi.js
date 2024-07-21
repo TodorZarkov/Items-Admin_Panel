@@ -9,7 +9,7 @@ async function request(method, uri, data) {
     const user = JSON.parse(localStorage.getItem("user"));
     let requestObj = {
         method,
-        headers: { "content-type": "application/json" }
+        headers: { "Content-Type": "application/json" }
     }
 
 
@@ -24,22 +24,23 @@ async function request(method, uri, data) {
         let response = await fetch(domain + uri, requestObj);
 
         if (response.status === 204) {
-            return response;
+            return {};
         }
 
         if (!response.ok) {
             if(response.status === 403) {
+                //TODO: NO PLACE FOR AUTH LOGIC HERE
                 localStorage.removeItem("user");
             }
             const err = await response.json();
-            throw new Error(err.message);
+            throw err;
         }
 
         let result = await response.json();
         return result;
 
     } catch (error) {
-        //alert(error.message);
+        //TODO: SEE IF THERE IS TIMEOUT OR WRONG JSON
         throw error;
     }
 

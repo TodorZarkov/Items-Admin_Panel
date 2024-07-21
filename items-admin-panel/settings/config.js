@@ -1,1 +1,1 @@
-export const apiHost = 'https://localhost:7229'
+export const apiHost = 'https://localhost:7229/api'
