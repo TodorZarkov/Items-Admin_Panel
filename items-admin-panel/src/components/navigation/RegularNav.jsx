@@ -27,7 +27,7 @@ export function RegularNav() {
 
                     <Link to="/">Change Picture</Link>
 
-                    <Link to="/">Logout</Link>
+                    <Link to="/Logout">Logout</Link>
                 </div>
             </p>
             <li className="dropdown ">

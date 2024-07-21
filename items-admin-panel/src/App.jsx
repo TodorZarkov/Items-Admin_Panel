@@ -12,6 +12,7 @@ import { AuthContext } from "./contexts/AuthContext"
 import { login, register } from "./services/authService"
 import { useNavigate } from "react-router-dom"
 import { jwtDecode } from "jwt-decode"
+import { Logout } from "./components/Logout"
 
 
 function App() {
@@ -56,7 +57,13 @@ function App() {
     }
   }
 
+  async function onLogout() {
+    setAuth({});
+    //TODO: LOGOUT ON THE SERVER
+  }
+
   const authContext = {
+    onLogout,
     onRegisterSubmit,
     onLoginSubmit,
     ...auth
@@ -90,6 +97,8 @@ function App() {
             <Register />
           </>
         } />
+
+        <Route path="/logout" element={<Logout/>} />
 
         <Route path="/tickets/create" element={<TicketCreate />} />
 
