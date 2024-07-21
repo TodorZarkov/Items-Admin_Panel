@@ -1,5 +1,10 @@
+import { Link } from "react-router-dom";
+
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
+
+import { host } from "../../../settings/config";
+import { ExternalLink } from "./ExternalLink";
 
 export function RegularNav() {
 
@@ -16,8 +21,13 @@ export function RegularNav() {
             <p className="avatar dropdown ">
                 <img className="dropbtn" src="/admin-logo.jpg" />
                 <div className="dropdown-content">
-                    <a href="/">{profileMessage}</a>
-                    <a href="/">Change Picture</a>
+                    <ExternalLink url={host+'/Identity/Account/Manage'}>
+                    {profileMessage}
+                    </ExternalLink>
+
+                    <Link to="/">Change Picture</Link>
+
+                    <Link to="/">Logout</Link>
                 </div>
             </p>
             <li className="dropdown ">
