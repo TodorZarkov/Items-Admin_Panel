@@ -13,13 +13,18 @@ import { login, register } from "./services/authService"
 import { useNavigate } from "react-router-dom"
 import { jwtDecode } from "jwt-decode"
 import { Logout } from "./components/Logout"
+import { ServerApiContext } from "./contexts/ServerApiContext"
+import * as api from "./services/serverApi"
 
 
 function App() {
 
   const navigate = useNavigate();
-  const [auth, setAuth] = useState();
 
+
+
+  //----------------------------------------------------------
+  const [auth, setAuth] = useState();
 
   async function onLoginSubmit(data) {
     try {
@@ -68,45 +73,61 @@ function App() {
     onLoginSubmit,
     ...auth
   };
+  //--------------------------------------------------
 
+  //--------------------------------------------------
+  const [serverApi, setServerApi] = useState();
+
+  async function serverGet(uri, data) {
+    api.auth = auth;
+    const result = await api.get(uri, data);
+    return result;
+  }
+
+
+  const serverApiContext = {
+    serverGet,
+  };
+//--------------------------------------------------
   return (
     <AuthContext.Provider value={{ ...authContext }}>
-      <Routes>
-        {/* DETAILS */}
-        <Route path="/*" element={
-          <>
-            <Header />
-            <Routes>
-              <Route path="tickets/:filter" element={<Tickets />} />
-              <Route path="units" element={<Units />} />
-              <Route path="/" element={<Welcome />} />
-            </Routes>
-          </>
-        } />
+      <ServerApiContext.Provider value={{ ...serverApiContext }}>
+        <Routes>
+          {/* DETAILS */}
+          <Route path="/*" element={
+            <>
+              <Header />
+              <Routes>
+                <Route path="tickets/:filter" element={<Tickets />} />
+                <Route path="units" element={<Units />} />
+                <Route path="/" element={<Welcome />} />
+              </Routes>
+            </>
+          } />
 
-        <Route path="/login" element={
-          <>
-            <Header />
-            <Login />
-          </>
-        } />
+          <Route path="/login" element={
+            <>
+              <Header />
+              <Login />
+            </>
+          } />
 
-        <Route path="/register" element={
-          <>
-            <Header />
-            <Register />
-          </>
-        } />
+          <Route path="/register" element={
+            <>
+              <Header />
+              <Register />
+            </>
+          } />
 
-        <Route path="/logout" element={<Logout/>} />
+          <Route path="/logout" element={<Logout />} />
 
-        <Route path="/tickets/create" element={<TicketCreate />} />
+          <Route path="/tickets/create" element={<TicketCreate />} />
 
-        <Route path="/tickets/:ticketId/details" element={<TicketDetails />} />
-      </Routes>
+          <Route path="/tickets/:ticketId/details" element={<TicketDetails />} />
+        </Routes>
 
-      <footer></footer>
-
+        <footer></footer>
+      </ServerApiContext.Provider>
     </AuthContext.Provider>
   );
 }
