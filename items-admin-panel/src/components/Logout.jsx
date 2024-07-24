@@ -8,7 +8,7 @@ export function Logout() {
 
     useEffect(() => {
         onLogout();
-    }, onLogout);
+    }, [onLogout]);
 
     return <Navigate to="/" />
 }

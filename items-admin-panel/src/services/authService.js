@@ -1,14 +1,22 @@
-import * as api from './serverApi'
+import { serverApiFactory } from './serverApi'
 
-const loginEndpoint = '/Login';
-const registerEndpoint = '/Register';
+export function authFactory(config) {
+    const api = serverApiFactory(config);
 
-export async function login(loginData) {
-    const token = await api.post(loginEndpoint, loginData);
-    return token;
-}
+    const loginEndpoint = '/Login';
+    const registerEndpoint = '/Register';
 
-export async function register(registerData) {
-    const token = await api.post(registerEndpoint, registerData);
-    return token;
+    async function login(loginData) {
+        const token = await api.post(loginEndpoint, loginData);
+        return token;
+    }
+
+    async function register(registerData) {
+        const token = await api.post(registerEndpoint, registerData);
+        return token;
+    }
+    return {
+        login,
+        register,
+    }
 }

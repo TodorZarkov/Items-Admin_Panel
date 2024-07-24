@@ -1,10 +1,17 @@
 import {apiHost} from '../../settings/config'
 
-const domain = apiHost;
-//depends on:
-//-auth.token (the Base64 JWT without the "Bearer" word)
 
-async function request(method, uri, data) {
+async function request(
+    method, 
+    {
+        domain=apiHost, 
+        token, 
+        authHeader="Authorize", 
+        tokenType="Bearer"
+    }, 
+    uri, 
+    data) {
+        
     let requestObj = {
         method,
         headers: { "Content-Type": "application/json" }
@@ -14,10 +21,10 @@ async function request(method, uri, data) {
     if (method === "post" || method === "put" || method === "patch") {
         requestObj.body = JSON.stringify(data);
     }
-    if (auth) {
-        requestObj.headers["Authorization"] = `Bearer ${auth.token}`;
+    if (token) {
+        requestObj.headers[`${authHeader}`] = `${tokenType} ${token}`;
     }
-    console.log('from server api before fetch, auth: ', auth);
+    console.log('from server api before fetch, token: ', token);
     try {
         let response = await fetch(domain + uri, requestObj);
 
@@ -26,10 +33,6 @@ async function request(method, uri, data) {
         }
 
         if (!response.ok) {
-            if(response.status === 403) {
-                //TODO: NO PLACE FOR AUTH LOGIC HERE
-                localStorage.removeItem("auth");
-            }
             const err = await response.json();
             throw err;
         }
@@ -44,8 +47,11 @@ async function request(method, uri, data) {
 
 }
 
-export let get = request.bind(null, "get");
-export let post = request.bind(null, "post");
-export let put = request.bind(null, "put");
-export let del = request.bind(null, "delete");
-export let auth = null;
+export function serverApiFactory(config) {
+    return {
+        get: request.bind(null, "get", config),
+        post: request.bind(null, "post", config),
+        put: request.bind(null, "put", config),
+        delete: request.bind(null, "delete", config),
+    }
+}
