@@ -1,13 +1,33 @@
+import { Link } from "react-router-dom";
 
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
+
+import { host } from "../../../settings/config";
+import { ExternalLink } from "./ExternalLink";
 
 export function RegularNav() {
+
+    const {claims} = useContext(AuthContext);
+    let profileMessage = "Manage Profile";
+    if (claims && claims.unique_name) {
+        profileMessage = claims.unique_name;
+    } else if(claims && claims.email){
+        profileMessage = claims.email;
+    }
+
     return (
         <>
             <p className="avatar dropdown ">
                 <img className="dropbtn" src="/admin-logo.jpg" />
                 <div className="dropdown-content">
-                    <a href="/">Menage Profile</a>
-                    <a href="/">Change Picture</a>
+                    <ExternalLink url={host+'/Identity/Account/Manage'}>
+                    {profileMessage}
+                    </ExternalLink>
+
+                    <Link to="/">Change Picture</Link>
+
+                    <Link to="/Logout">Logout</Link>
                 </div>
             </p>
             <li className="dropdown ">
