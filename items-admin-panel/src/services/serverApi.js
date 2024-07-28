@@ -6,7 +6,7 @@ async function request(
     {
         domain=apiHost, 
         token, 
-        authHeader="Authorize", 
+        authHeader="Authorization", 
         tokenType="Bearer"
     }, 
     uri, 

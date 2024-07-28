@@ -1,8 +1,20 @@
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useServiceWithAuth } from "../hooks/useServiceWithAuth";
+import { ticketServiceFactory } from "../services/ticketService";
+import { useForm } from "../hooks/useForm";
+import { TicketContext } from "../contexts/TicketContext";
 
 export function TicketCreate() {
 
   const {type} = useParams();
+
+  const {types} = useContext(TicketContext);
+  console.log(types);
+
+  // const{values, onChangeHandler, onSubmitHandler} = useForm({
+
+  // }, onSubmit);
 
   return (
     <form className="create-form" action="">

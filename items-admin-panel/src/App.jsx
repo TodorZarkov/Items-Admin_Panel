@@ -1,18 +1,21 @@
-import { Route, Routes } from "react-router-dom"
-import { TicketCreate } from "./components/TicketCreate"
-import { Header } from "./components/Header"
-import { Login } from "./components/Login"
-import { Register } from "./components/Register"
-import { Tickets } from "./components/Tickets"
-import { TicketDetails } from "./components/TicketDetails"
-import { Units } from "./components/Units"
-import { Welcome } from "./components/Welcome"
+import { Route, Routes } from "react-router-dom";
+import { TicketCreate } from "./components/TicketCreate";
+import { Header } from "./components/Header";
+import { Login } from "./components/Login";
+import { Register } from "./components/Register";
+import { Tickets } from "./components/Tickets";
+import { TicketDetails } from "./components/TicketDetails";
+import { Units } from "./components/Units";
+import { Welcome } from "./components/Welcome";
 import { useState } from "react";
-import { AuthContext } from "./contexts/AuthContext"
-import {authFactory} from "./services/authService"
-import { useNavigate } from "react-router-dom"
-import { jwtDecode } from "jwt-decode"
-import { Logout } from "./components/Logout"
+import { AuthContext } from "./contexts/AuthContext";
+import { authFactory } from "./services/authService";
+import { ticketServiceFactory } from "./services/ticketService";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { Logout } from "./components/Logout";
+import { useEffect } from "react";
+import { TicketContext } from "./contexts/TicketContext";
 
 
 function App() {
@@ -21,9 +24,10 @@ function App() {
 
 
 
-  //----------------------------------------------------------
+
+  //auth state --------------------------------------------------
   const [auth, setAuth] = useState();
-  const {login, register} = authFactory({});
+  const { login, register } = authFactory({});
 
   async function onLoginSubmit(data) {
     try {
@@ -74,44 +78,68 @@ function App() {
   };
   //--------------------------------------------------
 
+  //ticket state ---------------------------------------------
+  const ticketService = ticketServiceFactory({ ...auth });
+
+  const [ticketsData, setTickets] = useState({});
+  const [ticketTypes, setTicketTypes] = useState([]);
+
+  useEffect(() => {
+    ticketService.all()
+    .then((result) => setTickets(result));
+    
+    ticketService.allTypes()
+      .then((result) => setTicketTypes(result));
+
+  }, [])
+
+  const ticketContext = {
+    ticketsData,
+    ticketTypes,
+  };
+  console.log(ticketsData);
+  console.log(ticketTypes);
+  //----------------------------------------------------------
 
   return (
     <AuthContext.Provider value={{ ...authContext }}>
-      <Routes>
-        {/* DETAILS */}
-        <Route path="/*" element={
-          <>
-            <Header />
-            <Routes>
-              <Route path="tickets/:filter" element={<Tickets />} />
-              <Route path="units" element={<Units />} />
-              <Route path="/" element={<Welcome />} />
-            </Routes>
-          </>
-        } />
+      <TicketContext.Provider value={{ ...ticketContext }}>
+        <Routes>
+          {/* DETAILS */}
+          <Route path="/*" element={
+            <>
+              <Header />
+              <Routes>
+                <Route path="tickets/:filter" element={<Tickets />} />
+                <Route path="units" element={<Units />} />
+                <Route path="/" element={<Welcome />} />
+              </Routes>
+            </>
+          } />
 
-        <Route path="/login" element={
-          <>
-            <Header />
-            <Login />
-          </>
-        } />
+          <Route path="/login" element={
+            <>
+              <Header />
+              <Login />
+            </>
+          } />
 
-        <Route path="/register" element={
-          <>
-            <Header />
-            <Register />
-          </>
-        } />
+          <Route path="/register" element={
+            <>
+              <Header />
+              <Register />
+            </>
+          } />
 
-        <Route path="/logout" element={<Logout />} />
+          <Route path="/logout" element={<Logout />} />
 
-        <Route path="/tickets/create/:type" element={<TicketCreate />} />
+          <Route path="/tickets/create/:type" element={<TicketCreate />} />
 
-        <Route path="/tickets/:ticketId/details" element={<TicketDetails />} />
-      </Routes>
+          <Route path="/tickets/:ticketId/details" element={<TicketDetails />} />
+        </Routes>
 
-      <footer></footer>
+        <footer></footer>
+      </TicketContext.Provider>
     </AuthContext.Provider>
   );
 }

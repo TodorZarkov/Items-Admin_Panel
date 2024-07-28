@@ -10,8 +10,14 @@ export function ticketServiceFactory(config) {
         return result;
     }
 
+    async function allTypes() {
+        const result = await api.get(`${uri}/Types`);
+        return result;
+    }
+
 
     return {
         all,
+        allTypes
     };
 }

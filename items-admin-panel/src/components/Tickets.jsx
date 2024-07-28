@@ -1,21 +1,10 @@
-import { useEffect, useState } from "react";
-import { useServiceWithAuth } from "../hooks/useServiceWithAuth"
-import { ticketServiceFactory } from "../services/ticketService";
+import { useContext} from "react";
 import { Ticket } from "./Ticket";
+import { TicketContext } from "../contexts/TicketContext";
 
 export function Tickets() {
 
-  const ticketService = useServiceWithAuth(ticketServiceFactory);
-
-  const [ticketsData, setTickets] = useState({});
-
-  useEffect(() => {
-    ticketService.all().
-      then((result) => setTickets(result));
-
-  }, [])
-
-  console.log(ticketsData.tickets);
+  const {ticketsData} = useContext(TicketContext);
 
   return (
     <section className="all-container">
