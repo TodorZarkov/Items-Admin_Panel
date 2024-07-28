@@ -90,8 +90,19 @@ function App() {
 
   }, [])
 
-  function onTicketSubmit(data) {
+  async function onTicketSubmit(data) {
     console.log(data);
+    const file = await fetch(data.file).then((res) => res.blob());
+    let formData = new FormData();
+    formData.append("Title", `${data.title}`);
+    formData.append("Description", `${data.description}`);
+    formData.append("TypeId", `${data.ticketType}`);
+    formData.append("SnapShot", file);
+
+    await ticketService.create(formData);
+    //todo:update ticket state
+    //todo:navigate to my tickets
+    navigate('/tickets/all')
   }
   const ticketContext = {
     ticketsData,

@@ -397,7 +397,7 @@ li.prev-content {
   border: 1px solid white;
   border-radius: 9px;
   background-position: center;
-  background-image: url("/example-images/tall_image.png");
+  /* background-image: url("/example-images/tall_image.png"); */
   background-repeat: no-repeat;
   background-size:contain;
 

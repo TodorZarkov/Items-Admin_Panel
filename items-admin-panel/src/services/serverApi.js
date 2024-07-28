@@ -19,12 +19,17 @@ async function request(
 
 
     if (method === "post" || method === "put" || method === "patch") {
-        requestObj.body = JSON.stringify(data);
+        if(data instanceof FormData){
+            delete requestObj.headers["Content-Type"];
+            requestObj.body = data;
+        } else {
+            requestObj.body = JSON.stringify(data);
+        }
+        
     }
     if (token) {
         requestObj.headers[`${authHeader}`] = `${tokenType} ${token}`;
     }
-    console.log('from server api before fetch, token: ', token);
     try {
         let response = await fetch(domain + uri, requestObj);
 
