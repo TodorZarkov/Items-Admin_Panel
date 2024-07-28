@@ -54,11 +54,11 @@ export function RegularNav() {
             <li className="dropdown ">
                 <button className="btn important dropbtn" type="button">Create</button>
                 <div className="dropdown-content">
-                    <a href="/">Bug</a>
-                    <a href="/">Unit</a>
-                    <a href="/">Currency</a>
-                    <a href="/">Category</a>
-                    <a href="/">Any</a>
+                    <Link to="/tickets/create/bug">Bug</Link>
+                    <Link to="/tickets/create/unit">Unit</Link>
+                    <Link to="/tickets/create/currency">Currency</Link>
+                    <Link to="/tickets/create/category">Category</Link>
+                    <Link to="/tickets/create/other">Other</Link>
                 </div>
             </li>
         </>

@@ -52,6 +52,7 @@ export function serverApiFactory(config) {
         get: request.bind(null, "get", config),
         post: request.bind(null, "post", config),
         put: request.bind(null, "put", config),
+        patch: request.bind(null, "patch", config),
         delete: request.bind(null, "delete", config),
     }
 }

@@ -106,7 +106,7 @@ function App() {
 
         <Route path="/logout" element={<Logout />} />
 
-        <Route path="/tickets/create" element={<TicketCreate />} />
+        <Route path="/tickets/create/:type" element={<TicketCreate />} />
 
         <Route path="/tickets/:ticketId/details" element={<TicketDetails />} />
       </Routes>

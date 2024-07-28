@@ -156,7 +156,7 @@ nav.nav>ul:nth-child(1)>p {
 .row li {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   flex-direction: column;
   background-color: transparent;
   border: 1px solid #00B2FF;
@@ -166,6 +166,10 @@ nav.nav>ul:nth-child(1)>p {
   color: whitesmoke;
 }
 
+.row li.date {
+  word-wrap: break-word;
+  text-align: center;
+}
 
 li.prev-img {
   width: 48px;
@@ -178,7 +182,7 @@ li.prev-img {
 }
 
 li.prev-content {
-  justify-content: start;
+  justify-content: center;
   flex-grow: 1;
   min-width: 124px;
   line-height: 15px;
@@ -192,9 +196,11 @@ li.prev-content {
 }
 
 .vertical-txt {
+  align-items: flex-start;
   writing-mode: vertical-rl;
-  text-orientation: upright;
+  text-orientation:sideways;
   overflow: auto;
+
 }
 
 /* end rows with all data */
