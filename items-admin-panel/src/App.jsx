@@ -22,9 +22,6 @@ function App() {
 
   const navigate = useNavigate();
 
-
-
-
   //auth state --------------------------------------------------
   const [auth, setAuth] = useState();
   const { login, register } = authFactory({});
@@ -93,12 +90,14 @@ function App() {
 
   }, [])
 
+  function onTicketSubmit(data) {
+    console.log(data);
+  }
   const ticketContext = {
     ticketsData,
     ticketTypes,
+    onTicketSubmit,
   };
-  console.log(ticketsData);
-  console.log(ticketTypes);
   //----------------------------------------------------------
 
   return (

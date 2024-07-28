@@ -1,23 +1,24 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useServiceWithAuth } from "../hooks/useServiceWithAuth";
 import { ticketServiceFactory } from "../services/ticketService";
 import { useForm } from "../hooks/useForm";
 import { TicketContext } from "../contexts/TicketContext";
+import { BackButton } from "./navigation/BackButton";
 
 export function TicketCreate() {
-
+  const navigate = useNavigate();
   const {type} = useParams();
 
-  const {types} = useContext(TicketContext);
-  console.log(types);
+  const {ticketTypes, onTicketSubmit} = useContext(TicketContext);
+  console.log(ticketTypes);
 
-  // const{values, onChangeHandler, onSubmitHandler} = useForm({
+  const{values, onChangeHandler, onSubmitHandler} = useForm({
 
-  // }, onSubmit);
+  }, onTicketSubmit);
 
   return (
-    <form className="create-form" action="">
+    <form className="create-form" onSubmit={onSubmitHandler}>
       <div className="create-input-wrapper">
         <label htmlFor="title">Title:</label>
         <input type="text" name="title" id="title" />
@@ -29,7 +30,7 @@ export function TicketCreate() {
           id="description" />
       </div>
       <div className="create-form-buttons">
-        <button className="btn login" type="button">Back</button>
+        <BackButton/>
         <button className="btn register" type="submit">Create</button>
       </div>
       <div className="create-input-wrapper">
