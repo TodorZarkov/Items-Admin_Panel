@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 export function Ticket({ticket}) {
 
@@ -20,9 +21,9 @@ export function Ticket({ticket}) {
               </a>
             </li>
             <li className="prev-content">
-              <a href="/">
+              <Link to={`/tickets/${ticket.id}/details`}>
                 <p>{ticket.title}</p>
-              </a>
+              </Link>
             </li>
           </ul>
         </li>

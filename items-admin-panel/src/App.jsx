@@ -4,7 +4,7 @@ import { Header } from "./components/Header";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { Tickets } from "./components/Tickets";
-import { TicketDetails } from "./components/TicketDetails";
+import { TicketDetails } from "./components/TicketDetails/TicketDetails";
 import { Units } from "./components/Units";
 import { Welcome } from "./components/Welcome";
 import { useState } from "react";
