@@ -45,7 +45,7 @@ export function TicketCreate() {
       </div>
       <div className="create-form-buttons">
         <BackButton />
-        <button className="btn register" type="submit">Create</button>
+        <button className="btn create" type="submit">Create</button>
       </div>
       <div className="create-input-wrapper">
         <label htmlFor="type">Type:</label>
