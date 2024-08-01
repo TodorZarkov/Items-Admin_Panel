@@ -1,5 +1,5 @@
 import {useNavigate } from "react-router-dom";
-
+import s from "./BackButton.module.css"
 export function BackButton() {
     const navigate = useNavigate();
 
@@ -10,7 +10,7 @@ export function BackButton() {
 
     return (
         <button
-            className="btn login"
+            className={s.back}
             type="button"
             onClick={clickHandle}>Back</button>
     );

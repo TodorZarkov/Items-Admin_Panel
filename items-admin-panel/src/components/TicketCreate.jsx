@@ -4,7 +4,7 @@ import { useServiceWithAuth } from "../hooks/useServiceWithAuth";
 import { ticketServiceFactory } from "../services/ticketService";
 import { useForm } from "../hooks/useForm";
 import { TicketContext } from "../contexts/TicketContext";
-import { BackButton } from "./navigation/BackButton";
+import { BackButton } from "./navigation/BackButton/BackButton";
 
 export function TicketCreate() {
   const { type } = useParams();

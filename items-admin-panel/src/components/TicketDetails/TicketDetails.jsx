@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { BackButton } from "../navigation/BackButton/BackButton";
 
 export function TicketDetails() {
     const { ticketId } = useParams();
@@ -19,7 +20,7 @@ export function TicketDetails() {
                 <menu>
                     <button type="button">Watch</button>
                     <button type="button">Have Same Problem</button>
-                    <button type="button">Back</button>
+                    <BackButton/>
                 </menu>
             </section>
             <footer>
