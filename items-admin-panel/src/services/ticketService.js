@@ -20,10 +20,22 @@ export function ticketServiceFactory(config) {
         return result;
     }
 
+    async function update(id, data) {
+        const  result = await api.patch(`${uri}/${id}`, data);
+        return result;
+    }
+
+
+    async function getOne(id) {
+        const result = await api.get(`${uri}/${id}`);
+        return result;
+    }
 
     return {
         all,
         allTypes,
         create,
+        update,
+        getOne
     };
 }

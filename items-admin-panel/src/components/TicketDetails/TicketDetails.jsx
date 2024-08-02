@@ -1,8 +1,23 @@
 import { useParams } from "react-router-dom";
 import { BackButton } from "../navigation/BackButton/BackButton";
+import { AfflictedButton } from "./AfflictedButton/AfflictedButton";
+import { useEffect, useState } from "react";
+import { useServiceWithAuth } from "../../hooks/useServiceWithAuth";
+import { ticketServiceFactory } from "../../services/ticketService";
 
 export function TicketDetails() {
+    const ticketService = useServiceWithAuth(ticketServiceFactory);
+
     const { ticketId } = useParams();
+
+    const [ticket, setTicket] = useState({});
+
+    useEffect(() => {
+        //TODO: ERROR HANDLING 
+        ticketService.getOne(ticketId)
+            .then((result) => setTicket(result));
+    }, [])
+console.log(ticket.iHaveSameProblem);
     return (
         <article>
             <h3>Ticket title of {ticketId}</h3>
@@ -19,8 +34,10 @@ export function TicketDetails() {
                 </ul>
                 <menu>
                     <button type="button">Watch</button>
-                    <button type="button">Have Same Problem</button>
-                    <BackButton/>
+                    <AfflictedButton
+                        id={ticketId}
+                        iHaveSameProblem={ticket.iHaveSameProblem} />
+                    <BackButton />
                 </menu>
             </section>
             <footer>

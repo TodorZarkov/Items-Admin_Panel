@@ -1,0 +1,20 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: #ED6930;
+    border: 1px solid #ffd600;
+    border-radius: 18px;
+    min-width: 60px;
+    height: 30px;
+    text-transform:capitalize;
+    margin: 0;
+    cursor: pointer;
+    padding: 0 15px 0 15px;
+  }
+
+  .notAfflicted {
+    border: 1px solid red;
+    color: #ffd600;
+  }
