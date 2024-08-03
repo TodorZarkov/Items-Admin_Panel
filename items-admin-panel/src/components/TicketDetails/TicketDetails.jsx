@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useServiceWithAuth } from "../../hooks/useServiceWithAuth";
 import { ticketServiceFactory } from "../../services/ticketService";
 import { WatchButton } from "./WatchButton/WatchButton";
+import s from "./TicketDetails.module.css"
 
 export function TicketDetails() {
     const ticketService = useServiceWithAuth(ticketServiceFactory);
@@ -18,33 +19,38 @@ export function TicketDetails() {
         ticketService.getOne(ticketId)
             .then((result) => setTicket(result));
     }, [])
-    console.log(ticket)
+
     return (
-        <article>
-            <h3>{ticket.title}</h3>
-            <img src="/example-images/threading-bug.png"></img>
+        <article className={s.container}>
+            <h3 className={s.title}>{ticket.title}</h3>
+            <img
+                className={s.img}
+                src={`data:image/jpeg;base64,${ticket.snapShot}`}></img>
             <section>
-                <ul role='list'>
-                    <li>Type: {ticket.ticketType}</li>
-                    <li>Status: {ticket.ticketStatus}</li>
-                    <li>Severity: {ticket.severity}</li>
-                    <li>Watchers: {ticket.subscribers}</li>
+                <ul role='list' className={s.infoContainer}>
+
                     <li>Created: {ticket.created}</li>
                     <li>Modified: {ticket.modified}</li>
-                </ul>
-                <menu>
+                    <li>Type: {ticket.ticketType}</li>
                     <WatchButton
                         id={ticketId}
                         subscribed={ticket.subscribed}
                         subscribers={ticket.subscribers} />
-                    <BackButton />
+
                     <AfflictedButton
                         id={ticketId}
                         iHaveSameProblem={ticket.iHaveSameProblem}
                         withSameProblem={ticket.withSameProblem} />
+                    <li>Status: {ticket.ticketStatus}</li>
+                    <li>Severity: {ticket.severity}</li>
+                </ul>
+                <menu className={s.menuContainer}>
+
+                    <BackButton />
+
                 </menu>
             </section>
-            <footer>
+            <footer className={s.description}>
                 <h5>Description:</h5>
                 <p>{ticket.description}</p>
             </footer>
