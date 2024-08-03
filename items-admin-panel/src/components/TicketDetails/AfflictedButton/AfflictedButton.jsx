@@ -5,43 +5,55 @@ import { ticketServiceFactory } from "../../../services/ticketService";
 
 export function AfflictedButton({
     iHaveSameProblem,
-    id }) {
+    id,
+    withSameProblem }) {
     const ticketService = useServiceWithAuth(ticketServiceFactory);
 
     const [toggle, setToggle] = useState(iHaveSameProblem);
     const [loading, setLoading] = useState(false);
+    const [countSame, setSame] = useState(withSameProblem);
 
     useEffect(() => {
         setToggle(state => state = iHaveSameProblem);
-    }, [iHaveSameProblem]);
+        setSame(state => state = withSameProblem);
+    }, [iHaveSameProblem, withSameProblem]);
 
     function onToggle() {
         setLoading(state => state = true)
         ticketService.update(id, { "toggleSameProblem": true })
             .then(() => {
                 setToggle(state => !state);
-                setLoading(state => state = false)});
+                setLoading(state => state = false);
+                setSame((state) => (toggle?--state:++state));
+            });
     }
 
     let buttonContent = "Loading";
     let frameClass = `${s.frame}`;
     if (toggle !== undefined && !loading) {
         if (toggle === true) {
-            buttonContent = "I don't have same problem";
+            buttonContent = "Not Me!";
         } else {
-            buttonContent = "I Have Same Problem";
+            buttonContent = "Me too!";
         }
         frameClass = "";
     }
+    
     return (
-        <div className={frameClass}>
-            <button
-                type="button"
-                className={`${s.btn} ${toggle ? "" : s.notAfflicted}`}
-                onClick={onToggle}
-                disabled={toggle === undefined || loading ? true : false}
-            >{buttonContent}</button>
+        <div className={s.container}>
+            <p className={s.label} >
+                {countSame} with this problem!
+            </p>
+            <div className={frameClass}>
+                <button
+                    type="button"
+                    className={`${s.btn} ${toggle ? "" : s.notAfflicted}`}
+                    onClick={onToggle}
+                    disabled={toggle === undefined || loading ? true : false}
+                >{buttonContent}</button>
+            </div>
         </div>
+
 
     )
 }
