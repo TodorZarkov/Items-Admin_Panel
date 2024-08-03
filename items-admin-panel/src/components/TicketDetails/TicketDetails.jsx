@@ -1,13 +1,16 @@
 import { useParams } from "react-router-dom";
 import { BackButton } from "../navigation/BackButton/BackButton";
 import { AfflictedButton } from "./AfflictedButton/AfflictedButton";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useServiceWithAuth } from "../../hooks/useServiceWithAuth";
 import { ticketServiceFactory } from "../../services/ticketService";
 import { WatchButton } from "./WatchButton/WatchButton";
 import s from "./TicketDetails.module.css"
+import { AuthContext } from "../../contexts/AuthContext";
 
 export function TicketDetails() {
+    const { claims } = useContext(AuthContext);
+
     const ticketService = useServiceWithAuth(ticketServiceFactory);
 
     const { ticketId } = useParams();
@@ -32,15 +35,24 @@ export function TicketDetails() {
                     <li>Created: {ticket.created}</li>
                     <li>Modified: {ticket.modified}</li>
                     <li>Type: {ticket.ticketType}</li>
-                    <WatchButton
-                        id={ticketId}
-                        subscribed={ticket.subscribed}
-                        subscribers={ticket.subscribers} />
+                    {(claims ? (<>
+                        <WatchButton
+                            id={ticketId}
+                            subscribed={ticket.subscribed}
+                            subscribers={ticket.subscribers} />
 
-                    <AfflictedButton
-                        id={ticketId}
-                        iHaveSameProblem={ticket.iHaveSameProblem}
-                        withSameProblem={ticket.withSameProblem} />
+                        <AfflictedButton
+                            id={ticketId}
+                            iHaveSameProblem={ticket.iHaveSameProblem}
+                            withSameProblem={ticket.withSameProblem} />
+                    </>) : (<>
+                        <li>{ticket.subscribers} watching!</li>
+                        <li>{ticket.withSameProblem} with this problem!</li>
+                    </>)
+
+
+                    )}
+
                     <li>Status: {ticket.ticketStatus}</li>
                     <li>Severity: {ticket.severity}</li>
                 </ul>

@@ -42,7 +42,7 @@ export function WatchButton({
     return (
         <div className={s.container}>
             <p className={s.label} >
-                {countSubscribers} subscribers!
+                {countSubscribers} watching!
             </p>
             <div className={frameClass}>
                 <button
