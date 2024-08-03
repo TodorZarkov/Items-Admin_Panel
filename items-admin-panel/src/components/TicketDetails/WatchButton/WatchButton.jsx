@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react";
-import s from "./AfflictedButton.module.css"
+import s from "./WatchButton.module.css"
 import { useServiceWithAuth } from "../../../hooks/useServiceWithAuth";
 import { ticketServiceFactory } from "../../../services/ticketService";
 
-export function AfflictedButton({
-    iHaveSameProblem,
+export function WatchButton({
+    subscribed,
     id,
-    withSameProblem }) {
+    subscribers }) {
     const ticketService = useServiceWithAuth(ticketServiceFactory);
 
-    const [toggle, setToggle] = useState(iHaveSameProblem);
+    const [toggle, setToggle] = useState(subscribed);
     const [loading, setLoading] = useState(false);
-    const [countSame, setSame] = useState(withSameProblem);
+    const [countSubscribers, setSubscribers] = useState(subscribers);
 
     useEffect(() => {
-        setToggle(state => state = iHaveSameProblem);
-        setSame(state => state = withSameProblem);
-    }, [iHaveSameProblem, withSameProblem]);
+        setToggle(state => state = subscribed);
+        setSubscribers(state => state = subscribers);
+    }, [subscribed, subscribers]);
 
     function onToggle() {
         setLoading(state => state = true)
-        ticketService.update(id, { "toggleSameProblem": true })
+        ticketService.update(id, { "toggleSubscribe": true })
             .then(() => {
                 setToggle(state => !state);
                 setLoading(state => state = false);
-                setSame((state) => (toggle?--state:++state));
+                setSubscribers((state) => (toggle?--state:++state));
             });
     }
 
@@ -32,9 +32,9 @@ export function AfflictedButton({
     let frameClass = `${s.frame}`;
     if (toggle !== undefined && !loading) {
         if (toggle === true) {
-            buttonContent = "Remove Me!";
+            buttonContent = "Unwatch";
         } else {
-            buttonContent = "Add Me!";
+            buttonContent = "Watch!";
         }
         frameClass = "";
     }
@@ -42,7 +42,7 @@ export function AfflictedButton({
     return (
         <div className={s.container}>
             <p className={s.label} >
-                {countSame} with this problem!
+                {countSubscribers} subscribers!
             </p>
             <div className={frameClass}>
                 <button

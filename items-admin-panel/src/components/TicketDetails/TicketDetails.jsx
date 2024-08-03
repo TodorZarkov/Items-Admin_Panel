@@ -4,6 +4,7 @@ import { AfflictedButton } from "./AfflictedButton/AfflictedButton";
 import { useEffect, useState } from "react";
 import { useServiceWithAuth } from "../../hooks/useServiceWithAuth";
 import { ticketServiceFactory } from "../../services/ticketService";
+import { WatchButton } from "./WatchButton/WatchButton";
 
 export function TicketDetails() {
     const ticketService = useServiceWithAuth(ticketServiceFactory);
@@ -27,18 +28,20 @@ export function TicketDetails() {
                     <li>Type: {ticket.ticketType}</li>
                     <li>Status: {ticket.ticketStatus}</li>
                     <li>Severity: {ticket.severity}</li>
-                    <li>Afflicted Users: {ticket.withSameProblem}</li>
                     <li>Watchers: {ticket.subscribers}</li>
                     <li>Created: {ticket.created}</li>
                     <li>Modified: {ticket.modified}</li>
                 </ul>
                 <menu>
-                    <button type="button">Watch</button>
+                    <WatchButton
+                        id={ticketId}
+                        subscribed={ticket.subscribed}
+                        subscribers={ticket.subscribers} />
+                    <BackButton />
                     <AfflictedButton
                         id={ticketId}
                         iHaveSameProblem={ticket.iHaveSameProblem}
                         withSameProblem={ticket.withSameProblem} />
-                    <BackButton />
                 </menu>
             </section>
             <footer>
