@@ -21,16 +21,18 @@ export function Dialog({
             >
                 
                 <p>{message}</p>
-                <form method="dialog">
+                <form method="dialog" className={s.form}>
                     <button
+                        className={s.btnConfirm}
                         type="button"
                         onClick={onPositive}
-                    >Delete</button>
+                    >CONFIRM</button>
                     <button
+                        className={s.btnCancel}
                         type="button"
                         onClick={onNegative}
 
-                    >Cancel</button>
+                    >CANCEL</button>
                 </form>
                
             </dialog>
