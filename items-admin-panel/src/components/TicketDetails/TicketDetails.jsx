@@ -22,9 +22,8 @@ export function TicketDetails() {
         //TODO: ERROR HANDLING 
         ticketService.getOne(ticketId)
             .then((result) => setTicket(result));
-    }, [])
-    console.log(ticket);
-    console.log(claims);
+    }, []);
+
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>
@@ -68,7 +67,7 @@ export function TicketDetails() {
                         claims &&
                         claims.nameid === ticket.authorId &&
                         !ticket.assigneeId &&
-                        <DeleteButton />
+                        <DeleteButton ticketId={ticketId} />
                     )}
 
                     <BackButton />

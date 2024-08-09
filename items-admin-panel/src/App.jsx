@@ -16,6 +16,7 @@ import { jwtDecode } from "jwt-decode";
 import { Logout } from "./components/Logout";
 import { useEffect } from "react";
 import { TicketContext } from "./contexts/TicketContext";
+import { blobToBase64, formatDT } from "./services/utils";
 
 
 function App() {
@@ -99,15 +100,38 @@ function App() {
     formData.append("TypeId", `${data.ticketType}`);
     formData.append("SnapShot", file);
 
-    await ticketService.create(formData);
-    //todo:update ticket state
+    const newTicketId = await ticketService.create(formData);
+
+
+    console.log(ticketsData);
+    
+    setTickets(state => ({
+        totalCount: (state.totalCount++),
+        tickets: [...state.tickets, {
+          created: formatDT(Date.now()) ,
+          id: data.id,
+          severity: 0,
+          snapShot: blobToBase64(file)
+        } ]
+    }))
     //todo:navigate to my tickets
-    navigate('/tickets/all')
+    navigate('/tickets/all');
   }
+
+  async function onTicketDelete(id) {
+    setTickets((state) => ({
+        totalCount: (state.totalCount--),
+        tickets: (state.tickets.filter(t => t.id !== id))
+      })
+    );
+    navigate('/tickets/all');
+  }
+
   const ticketContext = {
     ticketsData,
     ticketTypes,
     onTicketSubmit,
+    onTicketDelete
   };
   //----------------------------------------------------------
 

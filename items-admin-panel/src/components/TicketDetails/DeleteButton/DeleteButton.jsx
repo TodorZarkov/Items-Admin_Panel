@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import s from "./DeleteButton.module.css"
 import { Dialog } from "../../Dialog/Dialog";
+import { TicketContext } from "../../../contexts/TicketContext";
 
 
-export function DeleteButton() {
+export function DeleteButton({
+    ticketId,
+}) {
 
     const [renderDialog, setRenderDialog] = useState(false);
+
+    const {onTicketDelete} = useContext(TicketContext);
 
     function onDeleteClick(e) {
         setRenderDialog(true);
@@ -13,12 +18,11 @@ export function DeleteButton() {
 
     function onConfirmClick(e) {
         setRenderDialog(false);
-        console.log("confirmed")
+        onTicketDelete(ticketId);
     };
 
     function onCancelClick(e) {
         setRenderDialog(false);
-        console.log("canceled")
     };
 
     return (
