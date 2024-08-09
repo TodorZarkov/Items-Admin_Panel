@@ -7,6 +7,7 @@ import { ticketServiceFactory } from "../../services/ticketService";
 import { WatchButton } from "./WatchButton/WatchButton";
 import s from "./TicketDetails.module.css"
 import { AuthContext } from "../../contexts/AuthContext";
+import { DeleteButton } from "./DeleteButton/DeleteButton";
 
 export function TicketDetails() {
     const { claims } = useContext(AuthContext);
@@ -22,7 +23,8 @@ export function TicketDetails() {
         ticketService.getOne(ticketId)
             .then((result) => setTicket(result));
     }, [])
-
+    console.log(ticket);
+    console.log(claims);
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>
@@ -35,6 +37,7 @@ export function TicketDetails() {
                     <li>Created: {ticket.created}</li>
                     <li>Modified: {ticket.modified}</li>
                     <li>Type: {ticket.ticketType}</li>
+                    <li>Author: {ticket.authorName}</li>
                     {(claims ? (<>
                         <WatchButton
                             id={ticketId}
@@ -45,6 +48,10 @@ export function TicketDetails() {
                             id={ticketId}
                             iHaveSameProblem={ticket.iHaveSameProblem}
                             withSameProblem={ticket.withSameProblem} />
+
+                        {(ticket.assignerName ? <li>Assigner: {ticket.assignerName}</li> : "")}
+
+                        {(ticket.assigneeName ? <li>Assignee: {ticket.assigneeName}</li> : "")}
                     </>) : (<>
                         <li>{ticket.subscribers} watching!</li>
                         <li>{ticket.withSameProblem} with this problem!</li>
@@ -57,6 +64,12 @@ export function TicketDetails() {
                     <li>Severity: {ticket.severity}</li>
                 </ul>
                 <menu className={s.menuContainer}>
+                    {(
+                        claims &&
+                        claims.nameid === ticket.authorId &&
+                        !ticket.assigneeId &&
+                        <DeleteButton />
+                    )}
 
                     <BackButton />
 
