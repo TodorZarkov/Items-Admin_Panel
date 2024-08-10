@@ -16,7 +16,7 @@ import { jwtDecode } from "jwt-decode";
 import { Logout } from "./components/Logout";
 import { useEffect } from "react";
 import { TicketContext } from "./contexts/TicketContext";
-import { blobToBase64, formatDT } from "./services/utils";
+import { blobToBase64, formatDateTime } from "./services/utils";
 
 
 function App() {
@@ -92,7 +92,7 @@ function App() {
   }, [])
 
   async function onTicketSubmit(data) {
-    console.log(data);
+    
     const file = await fetch(data.file).then((res) => res.blob());
     let formData = new FormData();
     formData.append("Title", `${data.title}`);
@@ -100,18 +100,20 @@ function App() {
     formData.append("TypeId", `${data.ticketType}`);
     formData.append("SnapShot", file);
 
-    const newTicketId = await ticketService.create(formData);
+    const {id} = await ticketService.create(formData);
 
-
-    console.log(ticketsData);
-    
+    const base64Snapshot = await blobToBase64(file);
     setTickets(state => ({
-        totalCount: (state.totalCount++),
+        totalCount: (++state.totalCount),
         tickets: [...state.tickets, {
-          created: formatDT(Date.now()) ,
-          id: data.id,
+          created: formatDateTime(new Date()) ,
+          id: id,
           severity: 0,
-          snapShot: blobToBase64(file)
+          snapShot: base64Snapshot,
+          status: "Open",
+          title: data.title,
+          type: (ticketTypes.find((t) => t.id === data.ticketType)).name,
+          withSameProblem: 0,
         } ]
     }))
     //todo:navigate to my tickets
@@ -120,7 +122,7 @@ function App() {
 
   async function onTicketDelete(id) {
     setTickets((state) => ({
-        totalCount: (state.totalCount--),
+        totalCount: (--state.totalCount),
         tickets: (state.tickets.filter(t => t.id !== id))
       })
     );

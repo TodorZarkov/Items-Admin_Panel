@@ -10,8 +10,6 @@ export function TicketCreate() {
   const { type } = useParams();
 
   const { ticketTypes, onTicketSubmit } = useContext(TicketContext);
-  console.log(ticketTypes);
-  console.log(type);
 
   const wantedType = ticketTypes.find((t) => t.name == type);
   const { values, onChangeHandler, onSubmitHandler } = useForm({
