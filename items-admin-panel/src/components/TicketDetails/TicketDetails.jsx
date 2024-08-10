@@ -8,6 +8,8 @@ import { WatchButton } from "./WatchButton/WatchButton";
 import s from "./TicketDetails.module.css"
 import { AuthContext } from "../../contexts/AuthContext";
 import { DeleteButton } from "./DeleteButton/DeleteButton";
+import { EditButton } from "./EditButton/EditButton";
+import { TicketContext } from "../../contexts/TicketContext";
 
 export function TicketDetails() {
     const { claims } = useContext(AuthContext);
@@ -18,12 +20,18 @@ export function TicketDetails() {
 
     const [ticket, setTicket] = useState({});
 
+    const { ticketsData } = useContext(TicketContext);
+    let countWithSameProblem = ticketsData
+        .tickets
+        .find(t => t.id == ticketId)
+        .withSameProblem
+
     useEffect(() => {
         //TODO: ERROR HANDLING 
         ticketService.getOne(ticketId)
             .then((result) => setTicket(result));
     }, []);
-
+    console.log(ticket);
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>
@@ -67,7 +75,13 @@ export function TicketDetails() {
                         claims &&
                         claims.nameid === ticket.authorId &&
                         !ticket.assigneeId &&
-                        <DeleteButton ticketId={ticketId} />
+                        countWithSameProblem < 1 &&
+                        //TODO: DECIDE WETHER TO SHOW (ACTIVATE) WATCH AND SAME PROBLEM BUTTONS WHEN AUTHOR!
+                        <>
+                            <DeleteButton ticketId={ticketId} />
+                            <EditButton ticketId={ticketId} />
+                        </>
+
                     )}
 
                     <BackButton />

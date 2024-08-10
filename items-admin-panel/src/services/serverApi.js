@@ -44,6 +44,7 @@ async function request(
 
         let result = {};
         try {
+            // if the 204 is forgotten, this  throws, so I will leave the  try-catch.
             result = await response.json();
         } catch (error) {
             console.log(error);
