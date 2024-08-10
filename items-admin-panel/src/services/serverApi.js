@@ -1,17 +1,17 @@
-import {apiHost} from '../../settings/config'
+import { apiHost } from '../../settings/config'
 
 
 async function request(
-    method, 
+    method,
     {
-        domain=apiHost, 
-        token, 
-        authHeader="Authorization", 
-        tokenType="Bearer"
-    }, 
-    uri, 
+        domain = apiHost,
+        token,
+        authHeader = "Authorization",
+        tokenType = "Bearer"
+    },
+    uri,
     data) {
-        
+
     let requestObj = {
         method,
         headers: { "Content-Type": "application/json" }
@@ -19,13 +19,13 @@ async function request(
 
 
     if (method === "post" || method === "put" || method === "patch") {
-        if(data instanceof FormData){
+        if (data instanceof FormData) {
             delete requestObj.headers["Content-Type"];
             requestObj.body = data;
         } else {
             requestObj.body = JSON.stringify(data);
         }
-        
+
     }
     if (token) {
         requestObj.headers[`${authHeader}`] = `${tokenType} ${token}`;
@@ -42,7 +42,13 @@ async function request(
             throw err;
         }
 
-        let result = await response.json();
+        let result = {};
+        try {
+            result = await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+            
         return result;
 
     } catch (error) {

@@ -121,12 +121,23 @@ function App() {
   }
 
   async function onTicketDelete(id) {
-    setTickets((state) => ({
-      totalCount: (--state.totalCount),
-      tickets: (state.tickets.filter(t => t.id !== id))
-    })
-    );
-    navigate('/tickets/all');
+
+    try {
+      await ticketService.del(id);
+
+      setTickets((state) => ({
+        totalCount: (--state.totalCount),
+        tickets: (state.tickets.filter(t => t.id !== id))})
+      );
+
+      navigate('/tickets/all');
+    } catch (error) {
+        console.log(error);
+        alert(Object.values(error)[0][0]);
+    }
+
+    
+    
   }
 
   async function onToggleWthSameProblem(id, toggle) {

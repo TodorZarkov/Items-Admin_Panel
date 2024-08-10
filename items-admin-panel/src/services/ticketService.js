@@ -31,11 +31,17 @@ export function ticketServiceFactory(config) {
         return result;
     }
 
+    async function del(id) {
+        const result = await api.delete(`${uri}/${id}`)
+        return result;
+    }
+
     return {
         all,
         allTypes,
         create,
         update,
-        getOne
+        getOne,
+        del
     };
 }
