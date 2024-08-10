@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import s from "./AfflictedButton.module.css"
 import { useServiceWithAuth } from "../../../hooks/useServiceWithAuth";
 import { ticketServiceFactory } from "../../../services/ticketService";
+import { TicketContext } from "../../../contexts/TicketContext";
 
 export function AfflictedButton({
     iHaveSameProblem,
@@ -12,6 +13,8 @@ export function AfflictedButton({
     const [toggle, setToggle] = useState(iHaveSameProblem);
     const [loading, setLoading] = useState(false);
     const [countSame, setSame] = useState(withSameProblem);
+
+    const {onToggleWthSameProblem} = useContext(TicketContext);
 
     useEffect(() => {
         setToggle(state => state = iHaveSameProblem);
@@ -25,6 +28,7 @@ export function AfflictedButton({
                 setToggle(state => !state);
                 setLoading(state => state = false);
                 setSame((state) => (toggle?--state:++state));
+                onToggleWthSameProblem(id, toggle);
             });
     }
 

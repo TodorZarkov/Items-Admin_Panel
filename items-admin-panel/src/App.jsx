@@ -84,15 +84,15 @@ function App() {
 
   useEffect(() => {
     ticketService.all()
-    .then((result) => setTickets(result));
-    
+      .then((result) => setTickets(result));
+
     ticketService.allTypes()
       .then((result) => setTicketTypes(result));
 
   }, [])
 
   async function onTicketSubmit(data) {
-    
+
     const file = await fetch(data.file).then((res) => res.blob());
     let formData = new FormData();
     formData.append("Title", `${data.title}`);
@@ -100,21 +100,21 @@ function App() {
     formData.append("TypeId", `${data.ticketType}`);
     formData.append("SnapShot", file);
 
-    const {id} = await ticketService.create(formData);
+    const { id } = await ticketService.create(formData);
 
     const base64Snapshot = await blobToBase64(file);
     setTickets(state => ({
-        totalCount: (++state.totalCount),
-        tickets: [...state.tickets, {
-          created: formatDateTime(new Date()) ,
-          id: id,
-          severity: 0,
-          snapShot: base64Snapshot,
-          status: "Open",
-          title: data.title,
-          type: (ticketTypes.find((t) => t.id === data.ticketType)).name,
-          withSameProblem: 0,
-        } ]
+      totalCount: (++state.totalCount),
+      tickets: [...state.tickets, {
+        created: formatDateTime(new Date()),
+        id: id,
+        severity: 0,
+        snapShot: base64Snapshot,
+        status: "Open",
+        title: data.title,
+        type: (ticketTypes.find((t) => t.id === data.ticketType)).name,
+        withSameProblem: 0,
+      }]
     }))
     //todo:navigate to my tickets
     navigate('/tickets/all');
@@ -122,18 +122,29 @@ function App() {
 
   async function onTicketDelete(id) {
     setTickets((state) => ({
-        totalCount: (--state.totalCount),
-        tickets: (state.tickets.filter(t => t.id !== id))
-      })
+      totalCount: (--state.totalCount),
+      tickets: (state.tickets.filter(t => t.id !== id))
+    })
     );
     navigate('/tickets/all');
+  }
+
+  async function onToggleWthSameProblem(id, toggle) {
+    setTickets(state => ({
+      totalCount: state.totalCount,
+      tickets: (state.tickets.map(t => (t.id !== id?t:({
+        ...t,
+        withSameProblem: (toggle?--t.withSameProblem:++t.withSameProblem)
+      }))))
+    }))
   }
 
   const ticketContext = {
     ticketsData,
     ticketTypes,
     onTicketSubmit,
-    onTicketDelete
+    onTicketDelete,
+    onToggleWthSameProblem
   };
   //----------------------------------------------------------
 
