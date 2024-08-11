@@ -34,7 +34,8 @@ export function TicketDetails() {
         ticketService.getOne(ticketId)
             .then((result) => setTicket(result));
     }, []);
-  
+  console.log(claims)
+
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>
@@ -48,7 +49,7 @@ export function TicketDetails() {
                     <li>Modified: {ticket.modified}</li>
                     <li>Type: {ticket.ticketType}</li>
                     <li>Author: {ticket.authorName}</li>
-                    {(claims ? (<>
+                    {(claims && claims.nameid !== ticket.authorId? (<>
                         <WatchButton
                             id={ticketId}
                             subscribed={ticket.subscribed}
