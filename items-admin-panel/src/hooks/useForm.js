@@ -4,7 +4,13 @@ export function useForm(initialValues, onSubmit) {
     const [values, setValues] = useState(initialValues);
 
     function onChangeHandler(e) {
-        setValues(state => ({...state, [e.target.name]: e.target.value}));
+        if (e.target.files) {
+            const blobUrl = URL.createObjectURL(e.target.files[0]);
+            setValues(state => ({ ...state, file: blobUrl }));
+        }
+        setValues(state => ({ ...state, [e.target.name]: e.target.value }));
+
+
     };
 
     function onSubmitHandler(e) {
@@ -13,9 +19,16 @@ export function useForm(initialValues, onSubmit) {
         onSubmit(values)
     }
 
+    const changeValues = (newValues) => {
+        // todo: the newValues type must be of type initialValues - VALIDATE
+        
+        setValues(newValues);
+    };
+
     return {
         values,
         onChangeHandler,
-        onSubmitHandler
+        onSubmitHandler,
+        changeValues
     };
 };

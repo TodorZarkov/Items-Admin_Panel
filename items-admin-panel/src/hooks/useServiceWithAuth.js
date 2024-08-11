@@ -8,7 +8,7 @@ export function useServiceWithAuth(serviceFactory) {
     const config = {
         token,
         domain: apiHost,
-        authHeader: "Authorize",
+        authHeader: "Authorization",
         tokenType: "Bearer",
     };
 

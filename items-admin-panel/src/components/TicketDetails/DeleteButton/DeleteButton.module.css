@@ -1,0 +1,22 @@
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: red;
+    border: 1px solid #ffd600;
+    
+    border-radius: 51%;
+    text-transform: capitalize;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+  
+    text-wrap: nowrap;
+  }
+  
+  button.btn:active {
+    border-color: gray;
+  }
