@@ -1,10 +1,10 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 import { jwtDecode } from "jwt-decode";
 
 import { authFactory } from "../services/authService";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 
 export const AuthContext = createContext();
@@ -12,7 +12,7 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
 
     const navigate = useNavigate();
-    const [auth, setAuth] = useState();
+    const [auth, setAuth] = useLocalStorage("auth",{});
     const { login, register } = authFactory({});
 
     async function onLoginSubmit(data) {
