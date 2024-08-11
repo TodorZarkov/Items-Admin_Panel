@@ -128,31 +128,54 @@ function App() {
 
       setTickets((state) => ({
         totalCount: (--state.totalCount),
-        tickets: (state.tickets.filter(t => t.id !== id))})
+        tickets: (state.tickets.filter(t => t.id !== id))
+      })
       );
 
       navigate('/tickets/all');
     } catch (error) {
-        console.log(error);
-        alert(Object.values(error)[0][0]);
+      console.log(error);
+      alert(Object.values(error)[0][0]);
     }
 
-    
-    
+
+
   }
 
   async function onToggleWthSameProblem(id, toggle) {
     setTickets(state => ({
       totalCount: state.totalCount,
-      tickets: (state.tickets.map(t => (t.id !== id?t:({
+      tickets: (state.tickets.map(t => (t.id !== id ? t : ({
         ...t,
-        withSameProblem: (toggle?--t.withSameProblem:++t.withSameProblem)
+        withSameProblem: (toggle ? --t.withSameProblem : ++t.withSameProblem)
       }))))
     }))
   }
 
   async function onTicketEditByUser(data) {
-    console.log(data);
+    
+    const file = await fetch(data.file).then((res) => res.blob());
+    let formData = new FormData();
+    formData.append("Title", `${data.title}`);
+    formData.append("Description", `${data.description}`);
+    formData.append("TypeId", `${data.ticketType}`);
+    formData.append("SnapShot", file);
+
+    await ticketService.edit(formData,data.id);
+
+    const base64Snapshot = await blobToBase64(file);
+
+    setTickets(state => ({
+      totalCount: state.totalCount,
+      tickets: state.tickets.map(t => (t.id !== data.id ? t : {
+        ...t,
+        snapShot: base64Snapshot,
+        title: data.title,
+        type: (ticketTypes.find((t) => t.id == data.ticketType)).name
+      }))
+    }))
+    //todo:navigate to my tickets
+    navigate('/tickets/all');
   }
 
   const ticketContext = {
@@ -201,7 +224,7 @@ function App() {
 
           <Route path="/tickets/:ticketId/details" element={<TicketDetails />} />
 
-          <Route path="/tickets/:ticketId/edit" element={<TicketEdit/>} />
+          <Route path="/tickets/:ticketId/edit" element={<TicketEdit />} />
         </Routes>
 
         <footer></footer>

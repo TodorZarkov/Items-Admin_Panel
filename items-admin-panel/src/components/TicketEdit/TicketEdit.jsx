@@ -15,6 +15,7 @@ export function TicketEdit() {
     const ticketService = useServiceWithAuth(ticketServiceFactory);
     
     const { values, onChangeHandler, onSubmitHandler, changeValues } = useForm({
+        "id":'',
         "title":'',
         "description":'',
         "ticketType":'',
@@ -28,8 +29,9 @@ export function TicketEdit() {
             .then((result) => {
                 let currentType = ticketTypes
                 .find((t) => t.name === result.ticketType);
-                
+
                 changeValues({
+                    "id": ticketId,
                     "title": result.title,
                     "description": result.description ? result.description : "",
                     "ticketType": currentType ? currentType.id : "",

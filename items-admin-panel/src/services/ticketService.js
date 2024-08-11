@@ -36,12 +36,18 @@ export function ticketServiceFactory(config) {
         return result;
     }
 
+    async function edit(data,id) {
+        const result = await api.put(`${uri}/${id}`,data);
+        return result;
+    }
+
     return {
         all,
         allTypes,
         create,
         update,
         getOne,
-        del
+        del,
+        edit
     };
 }
