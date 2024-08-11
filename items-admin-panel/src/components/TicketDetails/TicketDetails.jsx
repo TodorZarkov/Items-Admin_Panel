@@ -21,17 +21,20 @@ export function TicketDetails() {
     const [ticket, setTicket] = useState({});
 
     const { ticketsData } = useContext(TicketContext);
-    let countWithSameProblem = ticketsData
+    let countWithSameProblem = 0;
+    if (ticketsData && ticketsData.tickets) {
+        countWithSameProblem = ticketsData
         .tickets
         .find(t => t.id == ticketId)
-        .withSameProblem
+        .withSameProblem;
+    }
 
     useEffect(() => {
         //TODO: ERROR HANDLING 
         ticketService.getOne(ticketId)
             .then((result) => setTicket(result));
     }, []);
-    console.log(ticket);
+  
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>

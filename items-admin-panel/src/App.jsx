@@ -17,6 +17,7 @@ import { Logout } from "./components/Logout";
 import { useEffect } from "react";
 import { TicketContext } from "./contexts/TicketContext";
 import { blobToBase64, formatDateTime } from "./services/utils";
+import { TicketEdit } from "./components/TicketEdit/TicketEdit";
 
 
 function App() {
@@ -150,12 +151,17 @@ function App() {
     }))
   }
 
+  async function onTicketEditByUser(data) {
+    console.log(data);
+  }
+
   const ticketContext = {
     ticketsData,
     ticketTypes,
     onTicketSubmit,
     onTicketDelete,
-    onToggleWthSameProblem
+    onToggleWthSameProblem,
+    onTicketEditByUser
   };
   //----------------------------------------------------------
 
@@ -194,6 +200,8 @@ function App() {
           <Route path="/tickets/create/:type" element={<TicketCreate />} />
 
           <Route path="/tickets/:ticketId/details" element={<TicketDetails />} />
+
+          <Route path="/tickets/:ticketId/edit" element={<TicketEdit/>} />
         </Routes>
 
         <footer></footer>

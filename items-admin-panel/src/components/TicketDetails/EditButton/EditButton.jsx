@@ -2,16 +2,13 @@ import { useNavigate } from "react-router-dom";
 import s from "./EditButton.module.css"
 
 
-
-
-
 export function EditButton({
-    id
+    ticketId
 }) {
     const navigate = useNavigate();
     
     function onEditClick(e) {
-        navigate(`/tickets/${id}/edit`)
+        navigate(`/tickets/${ticketId}/edit`)
     }
 
     return (

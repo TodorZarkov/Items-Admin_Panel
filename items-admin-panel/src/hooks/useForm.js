@@ -19,9 +19,16 @@ export function useForm(initialValues, onSubmit) {
         onSubmit(values)
     }
 
+    const changeValues = (newValues) => {
+        // todo: the newValues type must be of type initialValues - VALIDATE
+        
+        setValues(newValues);
+    };
+
     return {
         values,
         onChangeHandler,
-        onSubmitHandler
+        onSubmitHandler,
+        changeValues
     };
 };

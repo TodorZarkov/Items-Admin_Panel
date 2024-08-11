@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { useParams } from "react-router-dom";
-import { useServiceWithAuth } from "../hooks/useServiceWithAuth";
-import { ticketServiceFactory } from "../services/ticketService";
 import { useForm } from "../hooks/useForm";
 import { TicketContext } from "../contexts/TicketContext";
 import { BackButton } from "./navigation/BackButton/BackButton";
