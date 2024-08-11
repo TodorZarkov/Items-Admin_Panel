@@ -10,6 +10,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { DeleteButton } from "./DeleteButton/DeleteButton";
 import { EditButton } from "./EditButton/EditButton";
 import { TicketContext } from "../../contexts/TicketContext";
+import { StatusButton } from "./StatusButton/StatusButton";
 
 export function TicketDetails() {
     const { claims } = useContext(AuthContext);
@@ -24,9 +25,9 @@ export function TicketDetails() {
     let countWithSameProblem = 0;
     if (ticketsData && ticketsData.tickets) {
         countWithSameProblem = ticketsData
-        .tickets
-        .find(t => t.id == ticketId)
-        .withSameProblem;
+            .tickets
+            .find(t => t.id == ticketId)
+            .withSameProblem;
     }
 
     useEffect(() => {
@@ -34,8 +35,8 @@ export function TicketDetails() {
         ticketService.getOne(ticketId)
             .then((result) => setTicket(result));
     }, []);
-  console.log(claims)
-
+    console.log(claims);
+    console.log(ticket);
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>
@@ -49,16 +50,18 @@ export function TicketDetails() {
                     <li>Modified: {ticket.modified}</li>
                     <li>Type: {ticket.ticketType}</li>
                     <li>Author: {ticket.authorName}</li>
-                    {(claims && claims.nameid !== ticket.authorId? (<>
+                    {(claims && claims.nameid !== ticket.authorId ? (<>
                         <WatchButton
                             id={ticketId}
                             subscribed={ticket.subscribed}
                             subscribers={ticket.subscribers} />
-
-                        <AfflictedButton
+                        {(ticket.ticketStatus !== "Close" &&
+                            <AfflictedButton
                             id={ticketId}
                             iHaveSameProblem={ticket.iHaveSameProblem}
                             withSameProblem={ticket.withSameProblem} />
+                        )}
+                        
 
                         {(ticket.assignerName ? <li>Assigner: {ticket.assignerName}</li> : "")}
 
@@ -71,7 +74,16 @@ export function TicketDetails() {
 
                     )}
 
-                    <li>Status: {ticket.ticketStatus}</li>
+                    {(claims && claims.role && claims.role === "Admin" && (ticket.ticketStatus == "Open" || (ticket.ticketStatus == "Assigned" && ticket.assigneeId == claims.nameid)) ?
+                        <StatusButton
+                            isAssignee={ticket.assigneeId == claims.nameid}
+                            id={ticketId}
+                            currentStatus={{ id: "", name: (ticket.ticketStatus ? ticket.ticketStatus.toLowerCase() : "") }}
+                            userId={claims.nameid}
+                        />
+                        :
+                        <li>Status: {ticket.ticketStatus}</li>
+                    )}
                     <li>Severity: {ticket.severity}</li>
                 </ul>
                 <menu className={s.menuContainer}>
