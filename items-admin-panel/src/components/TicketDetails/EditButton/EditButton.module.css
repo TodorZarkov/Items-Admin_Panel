@@ -1,0 +1,21 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: green;
+    border: 1px solid #ffd600;
+    
+    border-radius: 18px;
+    text-transform: capitalize;
+    cursor: pointer;
+    padding: 0;
+    width: 60px;
+    height: 30px;
+  
+    text-wrap: nowrap;
+  }
+  
+  button.btn:active {
+    border-color: gray;
+  }
