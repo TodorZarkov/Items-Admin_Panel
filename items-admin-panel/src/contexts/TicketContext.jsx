@@ -72,12 +72,12 @@ export function TicketProvider({ children }) {
     
       };
     
-      async function onToggleWthSameProblem(id, toggle) {
+      async function onToggleWthSameProblem(id, count) {
         setTickets(state => ({
           totalCount: state.totalCount,
           tickets: (state.tickets.map(t => (t.id !== id ? t : ({
             ...t,
-            withSameProblem: (toggle ? --t.withSameProblem : ++t.withSameProblem)
+            withSameProblem: count
           }))))
         }))
       };

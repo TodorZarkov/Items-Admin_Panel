@@ -21,22 +21,34 @@ export function TicketDetails() {
 
     const [ticket, setTicket] = useState({});
 
-    const { ticketsData } = useContext(TicketContext);
-    let countWithSameProblem = 0;
-    if (ticketsData && ticketsData.tickets) {
-        countWithSameProblem = ticketsData
-            .tickets
-            .find(t => t.id == ticketId)
-            .withSameProblem;
-    }
-
     useEffect(() => {
         //TODO: ERROR HANDLING 
         ticketService.getOne(ticketId)
             .then((result) => setTicket(result));
-    }, []);
-    console.log(claims);
-    console.log(ticket);
+    }, [ticketId]);
+
+    function changeWithSameProblem(count) {
+        setTicket(state => ({ 
+            ...state, 
+            withSameProblem: count,
+            iHaveSameProblem: !state.iHaveSameProblem
+         }));
+    };
+
+    let showStatusButton =
+        claims
+        && claims.role
+        && claims.role === "Admin"
+        && (ticket.ticketStatus == "Open"
+            || (ticket.ticketStatus == "Assigned"
+                && ticket.assigneeId == claims.nameid));
+
+    let showEditDelete =
+        claims
+        && claims.nameid === ticket.authorId
+        && !ticket.assigneeId
+        && ticket.withSameProblem < 1
+
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>
@@ -57,11 +69,12 @@ export function TicketDetails() {
                             subscribers={ticket.subscribers} />
                         {(ticket.ticketStatus !== "Close" &&
                             <AfflictedButton
-                            id={ticketId}
-                            iHaveSameProblem={ticket.iHaveSameProblem}
-                            withSameProblem={ticket.withSameProblem} />
+                                id={ticketId}
+                                iHaveSameProblem={ticket.iHaveSameProblem}
+                                withSameProblem={ticket.withSameProblem}
+                                onChangeWithSameProblem={changeWithSameProblem} />
                         )}
-                        
+
 
                         {(ticket.assignerName ? <li>Assigner: {ticket.assignerName}</li> : "")}
 
@@ -74,7 +87,7 @@ export function TicketDetails() {
 
                     )}
 
-                    {(claims && claims.role && claims.role === "Admin" && (ticket.ticketStatus == "Open" || (ticket.ticketStatus == "Assigned" && ticket.assigneeId == claims.nameid)) ?
+                    {(showStatusButton ?
                         <StatusButton
                             isAssignee={ticket.assigneeId == claims.nameid}
                             id={ticketId}
@@ -86,22 +99,17 @@ export function TicketDetails() {
                     )}
                     <li>Severity: {ticket.severity}</li>
                 </ul>
+
                 <menu className={s.menuContainer}>
                     {(
-                        claims &&
-                        claims.nameid === ticket.authorId &&
-                        !ticket.assigneeId &&
-                        countWithSameProblem < 1 &&
-                        //TODO: DECIDE WETHER TO SHOW (ACTIVATE) WATCH AND SAME PROBLEM BUTTONS WHEN AUTHOR!
+                        showEditDelete &&
                         <>
                             <DeleteButton ticketId={ticketId} />
                             <EditButton ticketId={ticketId} />
                         </>
 
                     )}
-
                     <BackButton />
-
                 </menu>
             </section>
             <footer className={s.description}>
