@@ -28,11 +28,29 @@ export function TicketDetails() {
     }, [ticketId]);
 
     function changeWithSameProblem(count) {
-        setTicket(state => ({ 
-            ...state, 
+        setTicket(state => ({
+            ...state,
             withSameProblem: count,
             iHaveSameProblem: !state.iHaveSameProblem
-         }));
+        }));
+    };
+
+    function changeStatus(status) {
+        if (status == "Assign") {
+            setTicket((state) => ({
+                ...state,
+                assigneeId: claims.nameid,
+                assigneeName: claims.email,
+                assignerId: claims.nameid,
+                assignerName: claims.email,
+                ticketStatus: status,
+            }));
+        } else {
+            setTicket((state) => ({
+                ...state,
+                ticketStatus: status,
+            }));
+        }
     };
 
     let showStatusButton =
@@ -40,15 +58,15 @@ export function TicketDetails() {
         && claims.role
         && claims.role === "Admin"
         && (ticket.ticketStatus == "Open"
-            || (ticket.ticketStatus == "Assigned"
-                && ticket.assigneeId == claims.nameid));
+            || ticket.assigneeId == claims.nameid);
 
     let showEditDelete =
         claims
         && claims.nameid === ticket.authorId
         && !ticket.assigneeId
         && ticket.withSameProblem < 1
-
+    console.log(ticket);
+    console.log(claims);
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>
@@ -83,16 +101,15 @@ export function TicketDetails() {
                         <li>{ticket.subscribers} watching!</li>
                         <li>{ticket.withSameProblem} with this problem!</li>
                     </>)
-
-
                     )}
 
                     {(showStatusButton ?
                         <StatusButton
-                            isAssignee={ticket.assigneeId == claims.nameid}
                             id={ticketId}
-                            currentStatus={{ id: "", name: (ticket.ticketStatus ? ticket.ticketStatus.toLowerCase() : "") }}
                             userId={claims.nameid}
+                            isAssignee={ticket.assigneeId == claims.nameid}
+                            currentStatus={ticket.ticketStatus}
+                            onChangeStatus={changeStatus}
                         />
                         :
                         <li>Status: {ticket.ticketStatus}</li>

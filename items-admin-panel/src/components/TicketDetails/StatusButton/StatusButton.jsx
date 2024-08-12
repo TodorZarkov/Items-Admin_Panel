@@ -4,15 +4,17 @@ import { useServiceWithAuth } from "../../../hooks/useServiceWithAuth";
 import { ticketServiceFactory } from "../../../services/ticketService";
 
 export function StatusButton({
-    isAssignee,
     id,
+    userId, 
+    isAssignee,
     currentStatus,
-    userId }) {
+    onChangeStatus
+}) {
     const ticketService = useServiceWithAuth(ticketServiceFactory);
 
     const [assigned, setAssigned] = useState(isAssignee);
-    const [loading, setLoading] = useState(false);
     const [ticketStatus, setTicketStatus] = useState(currentStatus);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setAssigned(isAssignee);
@@ -26,32 +28,35 @@ export function StatusButton({
                 .then(() => {
                     setAssigned(true);
                     setLoading(false);
-                    setTicketStatus({ id: 2, name: "assign" }); //todo: set/get these dynamically!!! no magic classes!!!
+                    setTicketStatus("Assign" );
+                    onChangeStatus("Assign");
                 });
         } else {
             ticketService.update(id, { "statusId": 3 })
                 .then(() => {
                     setLoading(true);
-                    setTicketStatus({ id: 3, name: "close" });
+                    setTicketStatus("Close");
+                    onChangeStatus("Close");
                 });
         }
 
     }
-console.log(ticketStatus.name)
+    
     let buttonContent = "Loading";
     let frameClass = `${s.frame}`;
+
     if (assigned !== undefined && !loading) {
-        if(ticketStatus.name === "close"){
+        if(ticketStatus === "Close"){
             buttonContent = "CLOSED";
             frameClass = `${s.frameStatic}`;
             setLoading(true);
-        }else if (assigned === true && ticketStatus.name !== "close") {
+        }else if (assigned === true && ticketStatus !== "Close") {
             buttonContent = "Close Ticket!";
         } else {
             buttonContent = "Assign To Self!";
         }
         frameClass = "";
-    } else if(loading && ticketStatus.name === "close") {
+    } else if(loading && ticketStatus === "Close") {
         buttonContent = "CLOSED";
         frameClass = `${s.frameStatic}`;
     }
@@ -59,7 +64,7 @@ console.log(ticketStatus.name)
     return (
         <div className={s.container}>
             <p className={s.label} >
-                Status: {ticketStatus.name.toUpperCase()}
+                Status: {ticketStatus.toUpperCase()}
             </p>
             <div className={frameClass}>
                 <button
