@@ -7,14 +7,16 @@ import { TicketContext } from "../../../contexts/TicketContext";
 export function AfflictedButton({
     iHaveSameProblem,
     id,
-    withSameProblem }) {
+    withSameProblem,
+    onChangeWithSameProblem }) {
+
     const ticketService = useServiceWithAuth(ticketServiceFactory);
 
     const [toggle, setToggle] = useState(iHaveSameProblem);
     const [loading, setLoading] = useState(false);
     const [countSame, setSame] = useState(withSameProblem);
 
-    const {onToggleWthSameProblem} = useContext(TicketContext);
+    const { onToggleWthSameProblem } = useContext(TicketContext);
 
     useEffect(() => {
         setToggle(state => state = iHaveSameProblem);
@@ -27,8 +29,11 @@ export function AfflictedButton({
             .then(() => {
                 setToggle(state => !state);
                 setLoading(state => state = false);
-                setSame((state) => (toggle?--state:++state));
-                onToggleWthSameProblem(id, toggle);
+                let count = countSame;
+                count = (toggle ? --count : ++count)
+                setSame(count);
+                onToggleWthSameProblem(id, count);
+                onChangeWithSameProblem(count);
             });
     }
 
@@ -42,7 +47,7 @@ export function AfflictedButton({
         }
         frameClass = "";
     }
-    
+
     return (
         <div className={s.container}>
             <p className={s.label} >

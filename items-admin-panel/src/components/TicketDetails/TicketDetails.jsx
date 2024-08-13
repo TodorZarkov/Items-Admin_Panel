@@ -9,32 +9,107 @@ import s from "./TicketDetails.module.css"
 import { AuthContext } from "../../contexts/AuthContext";
 import { DeleteButton } from "./DeleteButton/DeleteButton";
 import { EditButton } from "./EditButton/EditButton";
+import { formatDateTime } from "../../services/utils";
+import { OptionsButton } from "./OptionsButton/OptionsButton";
+import { StatusButton } from "./StatusButton/StatusButton"
 import { TicketContext } from "../../contexts/TicketContext";
 
 export function TicketDetails() {
     const { claims } = useContext(AuthContext);
+    const {onChangeType, onChangeSeverity, onChangeStatus} 
+        = useContext(TicketContext);
 
     const ticketService = useServiceWithAuth(ticketServiceFactory);
 
     const { ticketId } = useParams();
 
     const [ticket, setTicket] = useState({});
+    const [severities, setSetSeverities] = useState([{ name: "0", value: 0 }, { name: "1", value: 1 }, { name: "2", value: 2 }, { name: "3", value: 3 }]);
+    const [ticketTypes, setTypes] = useState([{ name: "Loading", value: "" }]);
+    const [loading,setLoading] = useState({type:false, severity:false})
 
-    const { ticketsData } = useContext(TicketContext);
-    let countWithSameProblem = 0;
-    if (ticketsData && ticketsData.tickets) {
-        countWithSameProblem = ticketsData
-        .tickets
-        .find(t => t.id == ticketId)
-        .withSameProblem;
-    }
 
     useEffect(() => {
         //TODO: ERROR HANDLING 
         ticketService.getOne(ticketId)
             .then((result) => setTicket(result));
-    }, []);
-  
+        ticketService.allTypes()
+            .then((result) => setTypes(result.map(tt => ({ name: tt.name, value: tt.id }))));
+    }, [ticketId]);
+
+    function changeWithSameProblem(count) {
+        setTicket(state => ({
+            ...state,
+            withSameProblem: count,
+            iHaveSameProblem: !state.iHaveSameProblem
+        }));
+    };
+
+    function changeStatus(status) {
+        if (status == "Assign") {
+            setTicket((state) => ({
+                ...state,
+                assigneeId: claims.nameid,
+                assigneeName: claims.email,
+                assignerId: claims.nameid,
+                assignerName: claims.email,
+                ticketStatus: status,
+                modified: formatDateTime(new Date()),
+            }));
+        } else {
+            setTicket((state) => ({
+                ...state,
+                ticketStatus: status,
+                modified: formatDateTime(new Date()),
+            }));
+        }
+        
+        onChangeStatus(ticketId, status);
+    };
+
+    function changeSeverity(option) {
+        setLoading(state => ({...state, severity: true}));
+
+        ticketService.update(ticketId, { "severity": option.value })
+            .then(() => {
+                setTicket((state) => ({
+                    ...state, 
+                    severity: option.value,
+                    modified: formatDateTime(new Date()),
+                }));
+                onChangeSeverity(ticketId, option.value);
+                setLoading(state => ({...state, severity: false}));
+            });
+    };
+
+    function changeType(option) {
+        setLoading(state => ({...state, type: true}));
+
+        ticketService.update(ticketId, { "typeId": option.value })
+            .then(() => {
+                setTicket((state) => ({
+                    ...state, 
+                    ticketType: option.name,
+                    modified: formatDateTime(new Date()),
+                }));
+                onChangeType(ticketId, option.name);
+                setLoading(state => ({...state, type: false}));
+            });
+    }
+
+    let showStatusButton =
+        claims
+        && claims.role
+        && claims.role === "Admin"
+        && (ticket.ticketStatus == "Open"
+            || ticket.assigneeId == claims.nameid);
+
+    let showEditDelete =
+        claims
+        && claims.nameid === ticket.authorId
+        && !ticket.assigneeId
+        && ticket.withSameProblem < 1
+
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>
@@ -44,51 +119,86 @@ export function TicketDetails() {
             <section>
                 <ul role='list' className={s.infoContainer}>
 
-                    <li>Created: {ticket.created}</li>
-                    <li>Modified: {ticket.modified}</li>
-                    <li>Type: {ticket.ticketType}</li>
-                    <li>Author: {ticket.authorName}</li>
-                    {(claims ? (<>
+                    <li className={s.li}>Created: {ticket.created}</li>
+                    <li className={s.li}>Modified: {ticket.modified}</li>
+
+                    <li className={s.li}>Author: {ticket.authorName}</li>
+                    {(claims && claims.nameid !== ticket.authorId ? (<>
                         <WatchButton
                             id={ticketId}
                             subscribed={ticket.subscribed}
                             subscribers={ticket.subscribers} />
+                        {(ticket.ticketStatus !== "Close" &&
+                            <AfflictedButton
+                                id={ticketId}
+                                iHaveSameProblem={ticket.iHaveSameProblem}
+                                withSameProblem={ticket.withSameProblem}
+                                onChangeWithSameProblem={changeWithSameProblem} />
+                        )}
 
-                        <AfflictedButton
-                            id={ticketId}
-                            iHaveSameProblem={ticket.iHaveSameProblem}
-                            withSameProblem={ticket.withSameProblem} />
 
-                        {(ticket.assignerName ? <li>Assigner: {ticket.assignerName}</li> : "")}
+                        {(ticket.assignerName ? <li className={s.li}>Assigner: {ticket.assignerName}</li> : "")}
 
-                        {(ticket.assigneeName ? <li>Assignee: {ticket.assigneeName}</li> : "")}
+                        {(ticket.assigneeName ? <li className={s.li}>Assignee: {ticket.assigneeName}</li> : "")}
                     </>) : (<>
-                        <li>{ticket.subscribers} watching!</li>
-                        <li>{ticket.withSameProblem} with this problem!</li>
+                        <li className={s.li}>{ticket.subscribers} watching!</li>
+                        <li className={s.li}>{ticket.withSameProblem} with this problem!</li>
                     </>)
-
-
                     )}
 
-                    <li>Status: {ticket.ticketStatus}</li>
-                    <li>Severity: {ticket.severity}</li>
+                    {(showStatusButton ?
+                        <StatusButton
+                            id={ticketId}
+                            userId={claims.nameid}
+                            isAssignee={ticket.assigneeId == claims.nameid}
+                            currentStatus={ticket.ticketStatus}
+                            onChangeStatus={changeStatus}
+                        />
+                        :
+                        <li className={s.li}>Status: {ticket.ticketStatus}</li>
+                    )}
+
+
+                    {(ticket.ticketStatus === "Assign"
+                        && ticket.assigneeId === claims.nameid
+                        ?
+                        <>
+                            <OptionsButton
+                                title="Severity: "
+                                defaultName={ticket.severity}
+                                defaultValue={ticket.severity}
+                                options={severities}
+                                loading={loading.severity}
+                                onSelect={changeSeverity}
+                            />
+                            <OptionsButton
+                                title="Type: "
+                                defaultName={ticket.ticketType}
+                                defaultValue="1"
+                                options={ticketTypes}
+                                loading={loading.type}
+                                onSelect={changeType}
+                            />
+                        </>
+                        :
+                        <>
+                            <li className={s.li}>Severity: {ticket.severity}</li>
+                            <li className={s.li}>Type: {ticket.ticketType}</li>
+                        </>
+                    )}
+
                 </ul>
+
                 <menu className={s.menuContainer}>
                     {(
-                        claims &&
-                        claims.nameid === ticket.authorId &&
-                        !ticket.assigneeId &&
-                        countWithSameProblem < 1 &&
-                        //TODO: DECIDE WETHER TO SHOW (ACTIVATE) WATCH AND SAME PROBLEM BUTTONS WHEN AUTHOR!
+                        showEditDelete &&
                         <>
                             <DeleteButton ticketId={ticketId} />
                             <EditButton ticketId={ticketId} />
                         </>
 
                     )}
-
                     <BackButton />
-
                 </menu>
             </section>
             <footer className={s.description}>

@@ -1,10 +1,19 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { Ticket } from "./Ticket";
 import { TicketContext } from "../contexts/TicketContext";
+import { useParams } from "react-router-dom";
 
 export function Tickets() {
 
-  const {ticketsData} = useContext(TicketContext);
+  const { ticketsData } = useContext(TicketContext);
+
+  const { filter } = useParams();
+
+  let filteredData = ticketsData.tickets ? ticketsData.tickets : [];
+  if (filteredData && filter) {
+    filteredData = filteredData
+    .filter((t) => t.status === filter);
+  }
 
   return (
     <section className="all-container">
@@ -17,8 +26,8 @@ export function Tickets() {
       </form>
       <ul role="list">
         {
-          ticketsData.tickets && ticketsData.tickets.map(t => (
-            <Ticket key={t.id} ticket={t}/>
+          filteredData.map(t => (
+            <Ticket key={t.id} ticket={t} />
           ))
         }
       </ul>
