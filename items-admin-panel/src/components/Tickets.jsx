@@ -9,12 +9,10 @@ export function Tickets() {
 
   const { filter } = useParams();
 
-  let filteredData = ticketsData;
-  if (ticketsData.tickets) {
-    filteredData = ticketsData
-    .tickets
-    .filter((t) => t.status=== filter);
-    console.log(filteredData);
+  let filteredData = ticketsData.tickets ? ticketsData.tickets : [];
+  if (filteredData && filter) {
+    filteredData = filteredData
+    .filter((t) => t.status === filter);
   }
 
   return (

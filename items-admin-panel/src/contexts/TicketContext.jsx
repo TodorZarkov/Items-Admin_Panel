@@ -47,8 +47,8 @@ export function TicketProvider({ children }) {
             withSameProblem: 0,
           }]
         }))
-        //todo:navigate to my tickets
-        navigate('/tickets/all');
+        
+        navigate('/tickets/Open');
       };
 
       async function onTicketDelete(id) {
@@ -62,7 +62,7 @@ export function TicketProvider({ children }) {
           })
           );
     
-          navigate('/tickets/all');
+          navigate('/tickets');
         } catch (error) {
           console.log(error);
           alert(Object.values(error)[0][0]);
@@ -105,7 +105,7 @@ export function TicketProvider({ children }) {
           }))
         }))
         //todo:navigate to my tickets
-        navigate('/tickets/all');
+        navigate('/tickets/Open');
       };
 
       function onChangeType(id, type) {
@@ -138,7 +138,7 @@ export function TicketProvider({ children }) {
         }));
       };
 
-console.log(ticketsData)
+
       const ticketContext = {
         ticketsData,
         ticketTypes,
