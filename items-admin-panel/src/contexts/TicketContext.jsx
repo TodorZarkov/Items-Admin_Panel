@@ -108,13 +108,35 @@ export function TicketProvider({ children }) {
         navigate('/tickets/all');
       };
 
+      function onChangeType(id, type) {
+        setTickets(state => ({
+          totalCount: state.totalCount,
+          tickets: (state.tickets.map(t => (t.id !== id ? t : ({
+            ...t,
+            type: type,
+          })))),
+        }));
+      };
+
+      function onChangeSeverity(id, severity) {
+        setTickets(state => ({
+          totalCount: state.totalCount,
+          tickets: (state.tickets.map(t => (t.id !== id ? t : ({
+            ...t,
+            severity: severity,
+          })))),
+        }));
+      };
+
       const ticketContext = {
         ticketsData,
         ticketTypes,
         onTicketSubmit,
         onTicketDelete,
         onToggleWthSameProblem,
-        onTicketEditByUser
+        onTicketEditByUser,
+        onChangeType,
+        onChangeSeverity
       };
 
     return (

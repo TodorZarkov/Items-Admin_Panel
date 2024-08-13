@@ -12,9 +12,11 @@ import { EditButton } from "./EditButton/EditButton";
 import { formatDateTime } from "../../services/utils";
 import { OptionsButton } from "./OptionsButton/OptionsButton";
 import { StatusButton } from "./StatusButton/StatusButton"
+import { TicketContext } from "../../contexts/TicketContext";
 
 export function TicketDetails() {
     const { claims } = useContext(AuthContext);
+    const {onChangeType, onChangeSeverity} = useContext(TicketContext);
 
     const ticketService = useServiceWithAuth(ticketServiceFactory);
 
@@ -72,6 +74,7 @@ export function TicketDetails() {
                     severity: option.value,
                     modified: formatDateTime(new Date()),
                 }));
+                onChangeSeverity(ticketId, option.value);
                 setLoading(state => ({...state, severity: false}));
             });
     };
@@ -86,6 +89,7 @@ export function TicketDetails() {
                     ticketType: option.name,
                     modified: formatDateTime(new Date()),
                 }));
+                onChangeType(ticketId, option.name);
                 setLoading(state => ({...state, type: false}));
             });
     }
