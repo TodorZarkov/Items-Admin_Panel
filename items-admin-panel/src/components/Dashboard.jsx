@@ -34,7 +34,7 @@ export function Dashboard() {
                 .map(b => (b.name === button ? { ...b, pressed: true } : { ...b, pressed: false }))
         }));
     }
-console.log(state);
+
     return (
         <section className="nav">
             <ul role="list">
