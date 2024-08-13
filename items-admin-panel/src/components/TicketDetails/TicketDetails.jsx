@@ -16,7 +16,8 @@ import { TicketContext } from "../../contexts/TicketContext";
 
 export function TicketDetails() {
     const { claims } = useContext(AuthContext);
-    const {onChangeType, onChangeSeverity} = useContext(TicketContext);
+    const {onChangeType, onChangeSeverity, onChangeStatus} 
+        = useContext(TicketContext);
 
     const ticketService = useServiceWithAuth(ticketServiceFactory);
 
@@ -27,7 +28,7 @@ export function TicketDetails() {
     const [ticketTypes, setTypes] = useState([{ name: "Loading", value: "" }]);
     const [loading,setLoading] = useState({type:false, severity:false})
 
-    console.log(ticketTypes)
+
     useEffect(() => {
         //TODO: ERROR HANDLING 
         ticketService.getOne(ticketId)
@@ -62,6 +63,8 @@ export function TicketDetails() {
                 modified: formatDateTime(new Date()),
             }));
         }
+        
+        onChangeStatus(status);
     };
 
     function changeSeverity(option) {
@@ -106,8 +109,7 @@ export function TicketDetails() {
         && claims.nameid === ticket.authorId
         && !ticket.assigneeId
         && ticket.withSameProblem < 1
-    console.log(ticket);
-    console.log(claims);
+
     return (
         <article className={s.container}>
             <h3 className={s.title}>{ticket.title}</h3>

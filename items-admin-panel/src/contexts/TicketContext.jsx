@@ -128,6 +128,17 @@ export function TicketProvider({ children }) {
         }));
       };
 
+      function onChangeStatus(id, newStatus) {
+        setTickets(state => ({
+          totalCount: state.totalCount,
+          tickets: (state.tickets.map(t => (t.id !== id ? t : ({
+            ...t,
+            status: newStatus,
+          })))),
+        }));
+      };
+      
+console.log(ticketsData)
       const ticketContext = {
         ticketsData,
         ticketTypes,
@@ -136,7 +147,8 @@ export function TicketProvider({ children }) {
         onToggleWthSameProblem,
         onTicketEditByUser,
         onChangeType,
-        onChangeSeverity
+        onChangeSeverity,
+        onChangeStatus
       };
 
     return (
