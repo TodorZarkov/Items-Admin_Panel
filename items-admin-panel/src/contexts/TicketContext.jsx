@@ -137,7 +137,7 @@ export function TicketProvider({ children }) {
           })))),
         }));
       };
-      
+
 console.log(ticketsData)
       const ticketContext = {
         ticketsData,

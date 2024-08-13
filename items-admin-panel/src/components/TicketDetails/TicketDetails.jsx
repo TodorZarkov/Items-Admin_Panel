@@ -64,7 +64,7 @@ export function TicketDetails() {
             }));
         }
         
-        onChangeStatus(status);
+        onChangeStatus(ticketId, status);
     };
 
     function changeSeverity(option) {

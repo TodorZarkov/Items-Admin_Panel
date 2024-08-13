@@ -23,6 +23,7 @@ function App() {
             <>
               <Header />
               <Routes>
+                <Route path="tickets" element={<Tickets />} />
                 <Route path="tickets/:filter" element={<Tickets />} />
                 <Route path="units" element={<Units />} />
                 <Route path="/" element={<Welcome />} />
