@@ -17,14 +17,25 @@ export function Dashboard() {
         if (ticketsData.tickets) {
             setState(state => ({
                 ...state,
-                countOpened: ticketsData.tickets.filter(t => t.status === "Open").length,
-                countAssigned: ticketsData.tickets.filter(t => t.status === "Assign").length,
-                countClosed: ticketsData.tickets.filter(t => t.status === "Close").length,
+                countOpened: count(ticketsData.tickets, t => (t.status === "Open")),
+                countAssigned: count(ticketsData.tickets, t => (t.status === "Assign")),
+                countClosed: count(ticketsData.tickets, t => (t.status === "Close")),
             }));
         }
 
     }, [ticketsData])
 
+    function count(arr, condition) {
+        let c = 0;
+
+        arr.forEach(element => {
+            if (condition(element)) {
+                c += 1;
+            }
+        });
+
+        return c;
+    }
 
     function onPressButton(button) {
         setState((state) => ({

@@ -58,7 +58,6 @@ export function RegularNav() {
                     <Link to="/tickets/create/NewUnit">Unit</Link>
                     <Link to="/tickets/create/NewCurrency">Currency</Link>
                     <Link to="/tickets/create/NewCategory">Category</Link>
-                    <Link to="/tickets/create/other">Other</Link>
                 </div>
             </li>
         </>
