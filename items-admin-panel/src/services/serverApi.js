@@ -18,7 +18,7 @@ async function request(
     }
 
 
-    if (method === "post" || method === "put" || method === "patch") {
+    if (method === "POST" || method === "PUT" || method === "PATCH") {
         if (data instanceof FormData) {
             delete requestObj.headers["Content-Type"];
             requestObj.body = data;
@@ -61,10 +61,10 @@ async function request(
 
 export function serverApiFactory(config) {
     return {
-        get: request.bind(null, "get", config),
-        post: request.bind(null, "post", config),
-        put: request.bind(null, "put", config),
-        patch: request.bind(null, "patch", config),
-        delete: request.bind(null, "delete", config),
+        get: request.bind(null, "GET", config),
+        post: request.bind(null, "POST", config),
+        put: request.bind(null, "PUT", config),
+        patch: request.bind(null, "PATCH", config),
+        delete: request.bind(null, "DELETE", config),
     }
 }
