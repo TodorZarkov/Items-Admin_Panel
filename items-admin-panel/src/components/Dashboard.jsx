@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { TicketContext } from "../contexts/TicketContext";
 import s from "./Dashboard.module.css"
 
@@ -7,7 +7,6 @@ export function Dashboard() {
 
     const { ticketsData } = useContext(TicketContext);
     const [state, setState] = useState({
-        buttons: [{ name: "Open", pressed: false }, { name: "Assign", pressed: false }, { name: "Close", pressed: false }],
         countOpened: 0,
         countAssigned: 0,
         countClosed: 0,
@@ -37,43 +36,32 @@ export function Dashboard() {
         return c;
     }
 
-    function onPressButton(button) {
-        setState((state) => ({
-            ...state,
-            buttons: state
-                .buttons
-                .map(b => (b.name === button ? { ...b, pressed: true } : { ...b, pressed: false }))
-        }));
-    }
-
     return (
         <section className="nav">
             <ul role="list">
-                <li><Link
-                    className={`btn dash ${state.buttons[0].pressed ? s.pressed : ""}`}
-                    onClick={() => onPressButton("Open")}
-                    to="/tickets/Open">
-                    <p>Opened</p>
-                    <p>{state.countOpened}</p>
-                </Link>
+                <li>
+                    <NavLink
+                        className={({ isActive }) => isActive ? `btn dash ${s.pressed}` : 'btn dash'}
+                        to="/tickets/Open">
+                        <p>Opened</p>
+                        <p>{state.countOpened}</p>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link
-                        className={`btn dash ${state.buttons[1].pressed ? s.pressed : ""}`}
-                        onClick={() => onPressButton("Assign")}
+                    <NavLink
+                        className={({ isActive }) => isActive ? `btn dash ${s.pressed}` : 'btn dash'}
                         to="/tickets/Assign">
                         <p>Assigned</p>
                         <p>{state.countAssigned}</p>
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link
-                        className={`btn dash ${state.buttons[2].pressed ? s.pressed : ""}`}
-                        onClick={() => onPressButton("Close")}
+                    <NavLink
+                        className={({ isActive }) => isActive ? `btn dash ${s.pressed}` : 'btn dash'}
                         to="/tickets/Close">
                         <p>Closed</p>
                         <p>{state.countClosed}</p>
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
         </section>
