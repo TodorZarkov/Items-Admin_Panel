@@ -12,6 +12,7 @@ import { TicketCreate } from "./components/TicketCreate";
 import { TicketDetails } from "./components/TicketDetails/TicketDetails";
 import { TicketEdit } from "./components/TicketEdit/TicketEdit";
 import { Units } from "./components/Units";
+import { RouteGuard } from "./components/common/RouteGuard";
 
 function App() {
 
@@ -46,12 +47,14 @@ function App() {
           } />
 
           <Route path="/logout" element={<Logout />} />
-
-          <Route path="/tickets/create/:type" element={<TicketCreate />} />
+          
+          <Route element={<RouteGuard/>}>
+            <Route path="/tickets/create/:type" element={<TicketCreate />} />
+            <Route path="/tickets/:ticketId/edit" element={<TicketEdit />} />
+          </Route>
 
           <Route path="/tickets/:ticketId/details" element={<TicketDetails />} />
 
-          <Route path="/tickets/:ticketId/edit" element={<TicketEdit />} />
         </Routes>
 
         <footer></footer>
