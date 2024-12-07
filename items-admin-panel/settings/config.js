@@ -3,5 +3,5 @@
 // export const host = 'https://localhost:7121/';
 
 
-export const apiHost = 'https://todor.sytes.net/api';
-export const host = 'https://todor.sytes.net';
+export const apiHost = 'https://items.zarkov.it/api';
+export const host = 'https://items.zarkov.it';
