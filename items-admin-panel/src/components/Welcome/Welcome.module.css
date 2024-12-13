@@ -1,0 +1,21 @@
+.welcomeContainer {
+    margin: 10px 2px 2px 2px;
+    border: 1px solid #ffd600;
+    border-radius: 12px;
+    padding: 0 5px 0 5px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    color:antiquewhite;
+}
+
+.centralMessage {
+    color:#ffd600;
+}
+
+.header {
+    padding-top: 30px;
+}

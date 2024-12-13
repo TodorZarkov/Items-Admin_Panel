@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { TicketProvider } from "./contexts/TicketContext";
 import { AuthProvider } from "./contexts/AuthContext";
 
-import { Welcome } from "./components/Welcome";
+import { Welcome } from "./components/Welcome/Welcome";
 import { Header } from "./components/Header";
 import { Register } from "./components/Register";
 import { Login } from "./components/Login";
