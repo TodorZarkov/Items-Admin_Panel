@@ -14,6 +14,7 @@ async function request(
 
     let requestObj = {
         method,
+        credentials: "include",
         headers: { "Content-Type": "application/json" }
     }
 

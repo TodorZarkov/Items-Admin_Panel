@@ -12,14 +12,15 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
 
     const navigate = useNavigate();
-    const [auth, setAuth] = useLocalStorage("auth",{});
-    const { login, register } = authFactory({});
+    const [auth, setAuth] = useLocalStorage("auth", {});
+    const { login, register, logout } = authFactory({});
 
     async function onLoginSubmit(data) {
         try {
             const result = await login(data);
             const claims = jwtDecode(result.token);
             const token = result.token;
+
             setAuth({ token, claims });
 
             navigate('/');
@@ -40,7 +41,7 @@ export function AuthProvider({ children }) {
             }
             const result = await register(registerData);
             const token = result.token;
-            const claims = jwtDecode(token)
+            const claims = jwtDecode(token);
             setAuth({ token, claims });
 
             navigate('/');
@@ -53,7 +54,15 @@ export function AuthProvider({ children }) {
 
     async function onLogout() {
         setAuth({});
-        //TODO: LOGOUT ON THE SERVER
+        
+        try {
+
+            await logout();
+
+        } catch (err) {
+            console.log("TODO: ADD ADEQUATE logout FAIL ERROR PAGE")
+            console.log(err);
+        }
     }
 
     const authContext = {
@@ -64,7 +73,7 @@ export function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value={{...authContext}}>
+        <AuthContext.Provider value={{ ...authContext }}>
             {children}
         </AuthContext.Provider>
     );
