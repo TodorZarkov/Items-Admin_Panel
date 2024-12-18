@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
   };
 
   if (mode === 'development') {
+
     config.server = {
       https: {
         key: fs.readFileSync(path.resolve(__dirname, './ssl/localhost-key.pem')),
@@ -17,10 +18,13 @@ export default defineConfig(({ mode }) => {
       host: 'localhost',
       port: 5173,
     };
+
   } else if (mode === 'production') {
+
     config.build = {
       outDir: 'dist',
     };
+    
   }
 
   return config;

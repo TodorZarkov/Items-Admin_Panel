@@ -1,6 +1,3 @@
-export const apiHost = 'https://localhost:7229/api';
-export const host = 'https://localhost:7121/';
 
-
-//export const apiHost = 'https://items.zarkov.it/api';
-//export const host = 'https://items.zarkov.it';
+export const apiHost = import.meta.env.VITE_API_BASE_URL;
+export const host = import.meta.env.VITE_HOST_BASE_URL;
